@@ -59,7 +59,7 @@ public class WxSailController extends BaseController  {
 			if (StringUtil.isNotBlank(uid)){
 				redirect = redirect + "%26uid%3D"+uid;
 			}
-			redirect = redirect+"&response_type=code&scope=snsapi_base&state=null#wechat_redirect";
+			redirect = redirect+"&response_type=code&scope=snsapi_userinfo&state=null#wechat_redirect";
 			response.sendRedirect(redirect);
 		} catch (IOException e) {
 			e.printStackTrace();
