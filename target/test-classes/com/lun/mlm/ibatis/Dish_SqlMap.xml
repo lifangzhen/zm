@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Dish_SqlMap">
+    
+    <typeAlias alias="category" type="com.lun.mlm.model.Category"/>
+    <typeAlias alias="dish" type="com.lun.mlm.model.Dish"/>
+    
+    <select id="listCategory"  resultClass="category">
+    	SELECT * FROM category c
+    	<isNotNull property="value">
+		WHERE c.name like concat('%', #name#, '%')
+		</isNotNull>
+		order by c.number
+		<isNotNull property="start">
+        LIMIT #start#, #end#
+        </isNotNull>
+    </select>
+    
+    <select id="getCategory"  resultClass="category">
+    	SELECT * FROM category c
+		WHERE c.id = #id#
+    </select>
+    
+    <select id="countCategory"  resultClass="java.lang.Integer">
+    	SELECT count(1) FROM category c
+    	<isNotNull property="value">
+		WHERE c.name like concat('%', #name#, '%')
+		</isNotNull>
+    </select>
+    
+    <insert id="addCategory" parameterClass="category">
+        INSERT INTO category (
+				id,
+				createTime,
+				name,
+				number,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #name#,
+			   #number#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updateCategory" parameterClass="category" >
+        UPDATE category t
+		SET <isNotNull property="name">
+					t.name = #name#,
+			   </isNotNull>
+				<isNotNull property="number">
+					t.number = #number#,
+				</isNotNull>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <delete id="deleteCategory" parameterClass="java.lang.String" >
+       DELETE FROM category 
+		WHERE id = #id#
+    </delete>
+    
+    <select id="listDish"  resultClass="dish">
+    	SELECT * FROM dish c
+    	WHERE c.status != 0
+    	<isNotEmpty property="name">
+		AND c.name like concat('%', #name#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="categoryId">
+		AND c.categoryId = #categoryId#
+		</isNotEmpty>
+		order by c.number, c.categoryId
+		<isNotEmpty property="start">
+        LIMIT #start#, #end#
+        </isNotEmpty>
+    </select>
+    
+    <select id="listDishByCategoryId"  parameterClass="java.util.HashMap"  resultClass="dish">
+    	SELECT * FROM dish c
+    	WHERE c.status != 0
+    	<isNotEmpty property="status">
+		AND c.status = #status#
+		</isNotEmpty>
+		<isNotEmpty property="categoryId">
+		AND c.categoryId = #categoryId#
+		</isNotEmpty>
+		order by c.number
+    </select>
+    
+    <select id="getDish"  resultClass="dish">
+    	SELECT * FROM dish c
+    	WHERE c.status != 0
+    	AND c.id = #id#
+    </select>
+    
+    <select id="countDish"  resultClass="java.lang.Integer">
+    	SELECT count(1) FROM dish d
+    	WHERE d.status != 0
+    	<isNotEmpty property="value">
+		AND d.name like concat('%', #name#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="categoryId">
+		AND d.categoryId = #categoryId#
+		</isNotEmpty>
+    </select>
+    
+    <select id="countDishByCategoryId"  resultClass="java.lang.Integer">
+    	SELECT count(1) FROM dish d
+    	WHERE d.status != 0
+    	<isNotNull property="value">
+		AND d.categoryId = #categoryId#
+		</isNotNull>
+    </select>
+    
+    <insert id="addDish" parameterClass="dish">
+        INSERT INTO dish (
+				id,
+				createTime,
+				name,
+				number,
+				categoryId,
+				categoryName,
+				unit,
+				pic,
+				price,
+				stock,
+				status,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #name#,
+			   #number#,
+			   #categoryId#,
+			   #categoryName#,
+			   #unit#,
+			   #pic#,
+			   #price#,
+			   #stock#,
+			   #status#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updateDish" parameterClass="dish" >
+        UPDATE dish t
+		SET <isNotNull property="name">
+					t.name = #name#,
+			   </isNotNull>
+				<isNotNull property="number">
+					t.number = #number#,
+				</isNotNull>
+				<isNotNull property="categoryId">
+					t.categoryId = #categoryId#,
+				</isNotNull>
+				<isNotNull property="categoryName">
+					t.categoryName = #categoryName#,
+				</isNotNull>
+				<isNotNull property="unit">
+					t.unit = #unit#,
+				</isNotNull>
+				<isNotNull property="pic">
+					t.pic = #pic#,
+				</isNotNull>
+				<isNotNull property="price">
+					t.price = #price#,
+				</isNotNull>
+				<isNotNull property="stock">
+					t.stock = #stock#,
+				</isNotNull>
+				<isNotNull property="status">
+					t.status = #status#,
+				</isNotNull>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <update id="deleteDish" parameterClass="java.lang.String" >
+       UPDATE dish t
+		SET t.status = 0
+		WHERE id = #id#
+    </update>
+    
+</sqlMap>

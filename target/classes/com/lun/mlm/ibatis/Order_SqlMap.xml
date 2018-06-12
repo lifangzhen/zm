@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Order_SqlMap">
+    
+    <typeAlias alias="order" type="com.lun.mlm.model.Order"/>
+    <typeAlias alias="orderDetail" type="com.lun.mlm.model.OrderDetail"/>
+    <typeAlias alias="prepayLog" type="com.lun.mlm.model.PrepayLog"/>
+    
+    <insert id="addOrder" parameterClass="order">
+        INSERT INTO `order` (
+				id,
+				createTime,
+				openid,
+				trueName,
+				phone,
+				addr,
+				pay,
+				wxpay,
+				prepay,
+				dishNum,
+				takeType,
+				payType,
+				day,
+				sendTime,
+				status,
+				mark,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #openid#,
+			   #trueName#,
+			   #phone#,
+			   #addr#,
+			   #pay#,
+			   #wxpay#,
+			   #prepay#,
+			   #dishNum#,
+			   #takeType#,
+			   #payType#,
+			   #day#,
+			   #sendTime#,
+			   #status#,
+			   #mark#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updateOrder" parameterClass="order" >
+        UPDATE `order` t
+		SET <isNotEmpty property="trueName">
+					t.trueName = #trueName#,
+			   </isNotEmpty>
+				<isNotEmpty property="phone">
+					t.phone = #phone#,
+				</isNotEmpty>
+				<isNotEmpty property="addr">
+					t.addr = #addr#,
+				</isNotEmpty>
+				<isNotEmpty property="takeType">
+					t.takeType = #takeType#,
+				</isNotEmpty>
+				<isNotEmpty property="status">
+					t.`status` = #status#,
+				</isNotEmpty>
+				<isNotEmpty property="mark">
+					t.`mark` = #mark#,
+				</isNotEmpty>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <update id="changeOrderTakeStatus" parameterClass="java.lang.String" >
+        UPDATE `order` t
+		SET t.takeStatus = ABS(t.takeStatus - 1)
+		WHERE t.id = #id#
+    </update>
+    
+    <insert id="addOrderDtail" parameterClass="java.util.List">
+        INSERT INTO order_detail (
+				id,
+				createTime,
+				orderId,
+				categoryId,
+				dishId,
+				dishName,
+				unit,
+				dishNum,
+				price,
+				day,
+				updateTime
+			)
+			VALUES
+			<iterate conjunction="," >
+				(#list[].id#, 
+				NOW(), 
+				#list[].orderId#, 
+				#list[].categoryId#, 
+				#list[].dishId#, 
+				#list[].dishName#, 
+				#list[].unit#, 
+				#list[].dishNum#,
+				#list[].price#,
+				#list[].day#,
+				NOW()
+				)
+			</iterate>
+    </insert>
+    
+    <select id="getOrder"  resultClass="order">
+    	SELECT * FROM `order` t
+		WHERE t.id = #id#
+    </select>
+    
+    <select id="listOrder"  resultClass="order">
+        SELECT m.gradeId, (select g.`name` from grade g where g.id = m.gradeId) as gradeName, t.* from `order` t LEFT JOIN `member` m
+		ON t.openid = m.id
+       	WHERE t.`status` != 0
+       	<isNotEmpty property="status"> 
+       		AND t.`status` = #status#
+       	</isNotEmpty>
+       	<isNotEmpty property="openid"> 
+			AND t.openid = #openid#
+		</isNotEmpty>
+       	<isNotEmpty property="trueName"> 
+			AND t.trueName like concat('%', #trueName#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="phone"> 
+			AND t.phone like concat('%', #phone#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="gradeId"> 
+			AND m.gradeId = #gradeId#
+		</isNotEmpty>
+		<isNotEmpty property="fromDate"> 
+			AND t.updateTime <![CDATA[>=]]>#fromDate#
+		</isNotEmpty>
+		<isNotEmpty property="toDate"> 
+			AND t.updateTime <![CDATA[<=]]>#toDate#
+		</isNotEmpty>
+		<isNotEmpty property="sendfromDate"> 
+			AND t.sendTime <![CDATA[>=]]>#sendfromDate#
+		</isNotEmpty>
+		<isNotEmpty property="sendtoDate"> 
+			AND t.sendTime <![CDATA[<=]]>#sendtoDate#
+		</isNotEmpty>
+		<isNotEmpty property="takeType"> 
+			AND t.takeType = #takeType#
+		</isNotEmpty>
+		order by t.updateTime desc
+		<isNotEmpty property="start">
+        	LIMIT #start#, #end#
+        </isNotEmpty>
+    </select>
+    
+    <select id="countOrder"  resultClass="java.lang.Integer">
+         SELECT count(1) from `order` t LEFT JOIN `member` m
+         ON t.openid = m.id
+       	WHERE t.`status` = 2
+       	<isNotEmpty property="openid"> 
+			AND t.openid = #openid#
+		</isNotEmpty>
+       	<isNotEmpty property="trueName"> 
+			AND t.trueName like concat('%', #trueName#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="phone"> 
+			AND t.phone like concat('%', #phone#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="gradeId"> 
+			AND m.gradeId = #gradeId#
+		</isNotEmpty>
+		<isNotEmpty property="fromDate"> 
+			AND t.updateTime <![CDATA[>=]]>#fromDate#
+		</isNotEmpty>
+		<isNotEmpty property="toDate"> 
+			AND t.updateTime <![CDATA[<=]]>#toDate#
+		</isNotEmpty>
+		<isNotEmpty property="sendfromDate"> 
+			AND t.sendTime <![CDATA[>=]]>#sendfromDate#
+		</isNotEmpty>
+		<isNotEmpty property="sendtoDate"> 
+			AND t.sendTime <![CDATA[<=]]>#sendtoDate#
+		</isNotEmpty>
+		<isNotEmpty property="takeType"> 
+			AND t.takeType = #takeType#
+		</isNotEmpty>
+    </select>
+    
+    <select id="getPrepayLog"  resultClass="prepayLog">
+    	SELECT * FROM `prepay_log` t
+		WHERE t.id = #id#
+    </select>
+    
+    <insert id="addPrepayLog" parameterClass="prepayLog">
+        INSERT INTO `prepay_log` (
+				id,
+				createTime,
+				openid,
+				trueName,
+				gradeId,
+				prepayId,
+				prepay,
+				day,
+				status,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #openid#,
+			   #trueName#,
+			   #gradeId#,
+			   #prepayId#,
+			   #prepay#,
+			   #day#,
+			   #status#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updatePrepayLog" parameterClass="prepayLog" >
+        UPDATE `prepay_log` t
+		SET <isNotEmpty property="status">
+					t.status = #status#,
+			   </isNotEmpty>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <select id="listPrepayLog"  resultClass="prepayLog">
+    	SELECT * FROM prepay_log p
+    	WHERE p.`status` = 2
+    	<isNotEmpty property="openid">
+			AND	p.openid = #openid#
+		</isNotEmpty>
+    	<isNotEmpty property="trueName">
+			AND p.trueName like concat('%', #trueName#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="day">
+			AND	p.day = #day#
+		</isNotEmpty>
+		<isNotEmpty property="start">
+        LIMIT #start#, #end#
+        </isNotEmpty>
+    </select>
+    
+	<select id="countPrepayLog"  resultClass="java.lang.Integer">
+    	SELECT count(1) FROM prepay_log p
+    	WHERE p.`status` = 2
+    	<dynamic>
+	    	<isNotEmpty property="openid">
+				AND	p.openid = #openid#
+			</isNotEmpty>
+	    	<isNotEmpty property="trueName">
+	    	    AND p.trueName like concat('%', #trueName#, '%')
+			</isNotEmpty>
+			<isNotEmpty property="day">
+				AND	p.day = #day#
+			</isNotEmpty>
+    	</dynamic>
+    </select>
+    
+	<select id="listOrderDetail"  resultClass="orderDetail">
+        SELECT * FROM `order_detail` t
+       	WHERE t.orderId = #orderId#
+    </select>
+    
+</sqlMap>

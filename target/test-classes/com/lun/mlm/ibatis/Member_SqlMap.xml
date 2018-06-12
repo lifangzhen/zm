@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Member_SqlMap">
+    
+    <typeAlias alias="member" type="com.lun.mlm.model.Member"/>
+    <typeAlias alias="grade" type="com.lun.mlm.model.Grade"/>
+    <typeAlias alias="prepayDeduct" type="com.lun.mlm.model.PrepayDeduct"/>
+    
+    <insert id="addMember" parameterClass="member">
+        INSERT INTO member (
+				id,
+				createTime,
+				headImg,
+				nickName,
+				trueName,
+				sex,
+				city,
+				subscribe,
+				subscribeTime,
+				unionid,
+				phone,
+				addr,
+				prepay,
+				gradeId,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #headImg#,
+			   #nickName#,
+			   #trueName#,
+			   #sex#,
+			   #city#,
+			   #subscribe#,
+			   #subscribeTime#,
+			   #unionid#,
+			   #phone#,
+			   #addr#,
+			   #prepay#,
+			   #gradeId#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updateMember" parameterClass="member" >
+        UPDATE member t
+		SET <isNotEmpty property="headImg">
+					t.headImg = #headImg#,
+			   </isNotEmpty>
+				<isNotEmpty property="nickName">
+					t.nickName = #nickName#,
+				</isNotEmpty>
+				<isNotEmpty property="trueName">
+					t.trueName = #trueName#,
+				</isNotEmpty>
+				<isNotEmpty property="sex">
+					t.sex = #sex#,
+				</isNotEmpty>
+				<isNotEmpty property="city">
+					t.city = #city#,
+				</isNotEmpty>
+				<isNotEmpty property="subscribe">
+					t.subscribe = #subscribe#,
+				</isNotEmpty>
+				<isNotEmpty property="subscribeTime">
+					t.subscribeTime = #subscribeTime#,
+				</isNotEmpty>
+				<isNotEmpty property="unionid">
+					t.unionid = #unionid#,
+				</isNotEmpty>
+				<isNotEmpty property="phone">
+					t.phone = #phone#,
+				</isNotEmpty>
+				<isNotEmpty property="addr">
+					t.addr = #addr#,
+				</isNotEmpty>
+				<isNotEmpty property="prepay">
+					t.prepay = #prepay#,
+				</isNotEmpty>
+				<isNotEmpty property="gradeId">
+					t.gradeId = #gradeId#,
+				</isNotEmpty>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <select id="getMember"  resultClass="member">
+    	SELECT * FROM member m
+		WHERE m.id = #id#
+    </select>
+    
+    <select id="listMember"  resultClass="member">
+    	SELECT * FROM member m
+		WHERE 1=1
+		<isNotEmpty property="trueName"> 
+			AND m.trueName like concat('%', #trueName#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			AND m.phone = #phone#
+		</isNotEmpty>
+		<isNotEmpty property="gradeId"> 
+			AND m.gradeId like concat('%', #gradeId#, '%')
+		</isNotEmpty>
+        ORDER BY m.createTime DESC
+		<isNotEmpty property="start">
+        LIMIT #start#, #end#
+        </isNotEmpty>
+    </select>
+    
+    <select id="countMember"  resultClass="java.lang.Integer">
+    	SELECT count(1) FROM member m
+		WHERE 1=1
+		<isNotEmpty property="trueName"> 
+			AND m.trueName like concat('%', #trueName#, '%')
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			AND m.phone = #phone#
+		</isNotEmpty>
+		<isNotEmpty property="gradeId"> 
+			AND m.gradeId like concat('%', #gradeId#, '%')
+		</isNotEmpty>
+    </select>
+    
+    <select id="listGrade"  resultClass="grade">
+    	SELECT * FROM grade m
+		order by m.prepay desc
+    </select>
+    
+    <select id="getGrade"  resultClass="grade">
+    	SELECT * FROM grade m
+		WHERE m.id = #id#
+    </select>
+    
+    <insert id="addGrade" parameterClass="grade">
+        INSERT INTO grade (
+				id,
+				createTime,
+				name,
+				prepay,
+				rate,
+				updateTime
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #name#,
+			   #prepay#,
+			   #rate#,
+			   NOW()
+			)
+    </insert>
+    
+    <update id="updateGrade" parameterClass="grade" >
+        UPDATE grade t
+		SET <isNotEmpty property="name">
+					t.name = #name#,
+			   </isNotEmpty>
+				<isNotEmpty property="prepay">
+					t.prepay = #prepay#,
+				</isNotEmpty>
+				<isNotEmpty property="rate">
+					t.rate = #rate#,
+				</isNotEmpty>
+				t.updateTime = NOW()
+		WHERE t.id = #id#
+    </update>
+    
+    <delete id="deleteGrade" parameterClass="java.lang.String" >
+       DELETE FROM grade 
+		WHERE id = #id#
+    </delete>
+    
+    <insert id="addPrepayDeduct" parameterClass="prepayDeduct">
+        INSERT INTO prepay_deduct (
+				id,
+				createTime,
+				openid,
+				trueName,
+				phone,
+				orderid,
+				deduct,
+				pre,
+				later
+			)
+			VALUES
+				(#id#,
+				 NOW(),
+			   #openid#,
+			   #trueName#,
+			   #phone#,
+			   #orderid#,
+			   #deduct#,
+			   #pre#,
+			   #later#
+			)
+    </insert>
+    
+</sqlMap>

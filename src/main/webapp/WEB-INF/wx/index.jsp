@@ -177,10 +177,6 @@
     $(function(){
         $.ajax({
             type: "POST",
-            async: false,
-            data: {
-                openid: $("#openid").val()
-            },
             url:  '/h5/config',
             dataType:"json",
             success: function(data) {
@@ -224,7 +220,10 @@
                     alert(data.message);
                     hideload();
                 }
-            }
+            },
+			error:function(data){
+                alert("erro:"+data.statusCode);
+			}
         });
     });
 

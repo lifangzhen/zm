@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings useStatementNamespaces="true" enhancementEnabled="true"
+        lazyLoadingEnabled="true" cacheModelsEnabled="true" />
+        
+    <sqlMap resource="com/lun/mlm/ibatis/Operator_SqlMap.xml" />
+    <sqlMap resource="com/lun/mlm/ibatis/Dish_SqlMap.xml" />
+    <sqlMap resource="com/lun/mlm/ibatis/Order_SqlMap.xml" />
+    <sqlMap resource="com/lun/mlm/ibatis/Member_SqlMap.xml" />
+    <sqlMap resource="com/lun/mlm/ibatis/Wx_SqlMap.xml" />
+</sqlMapConfig>
