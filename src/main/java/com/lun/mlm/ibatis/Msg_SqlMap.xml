@@ -6,6 +6,37 @@
     
     <typeAlias alias="zmMsg" type="com.lun.mlm.model.ZmMsg"/>
 	<typeAlias alias="zmBanner" type="com.lun.mlm.model.ZmBanner"/>
+	<typeAlias alias="zmUser" type="com.lun.mlm.model.ZmUser"/>
+
+	<insert id="addZmUser" parameterClass="zmUser">
+		INSERT INTO zm_user (
+		id,
+		open_id,
+		name,
+		head_img,
+		sex,
+		area,
+		phone,
+		create_at,
+		update_at
+		)
+		VALUES
+		(#id#,
+		#open_id#,
+		#name#,
+		#head_img#,
+		#sex#,
+		#area#,
+		#phone#,
+		NOW(),
+		NOW()
+		)
+	</insert>
+
+	<select id="getUserByOpenId" resultClass="zmUser">
+		SELECT * FROM zm_user m
+		WHERE m.open_id = #openId#
+	</select>
 
 	<select id="listBanner"  resultClass="zmBanner">
 		SELECT * FROM zm_banner m

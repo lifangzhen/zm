@@ -19,6 +19,26 @@ import org.apache.commons.logging.LogFactory;
 
 public class StringUtil {
     private final static Log log = LogFactory.getLog(StringUtil.class);
+	public static String randomNum(int length) {
+		Random ram = new Random();
+		int inum = Math.abs(ram.nextInt());
+		String numt = String.valueOf(inum);
+		StringBuffer sbbase = new StringBuffer("0");
+
+		for(int i = 0; i < length; ++i) {
+			sbbase.append("0");
+		}
+
+		String sbase = sbbase.toString();
+		String snum = null;
+		if(numt.length() < length) {
+			snum = sbase.substring(0, length - numt.length()) + numt;
+		} else {
+			snum = numt.substring(0, length);
+		}
+
+		return snum;
+	}
 
     public static String encodePassword(String password, String algorithm) {
         byte[] unencodedPassword = password.getBytes();

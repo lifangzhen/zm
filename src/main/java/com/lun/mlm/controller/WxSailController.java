@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.lun.mlm.dao.MsgDao;
 import com.lun.mlm.model.ZmBanner;
 import com.lun.mlm.model.ZmMsg;
+import com.lun.mlm.model.ZmUser;
 import com.lun.mlm.utils.ApiResponse;
+import com.lun.mlm.utils.IDGenerator;
+import com.townmc.mp.model.MpUser;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -45,31 +48,52 @@ public class WxSailController extends BaseController  {
 	@Autowired
 	MsgDao msgDao;
 	@RequestMapping(value = "h5/redirect")
-	public void redirect(String msgId, HttpServletResponse response) {
+	public void redirect(String storeId,String tableId, String uid, HttpServletResponse response) {
 		try {
-			System.out.println("+++++++++++++++++++++++++++++++++++"+msgId+"+++++++++++++++++++++++++++++=");
-			response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex%3FmsgId%3D"+msgId+"&response_type=code&scope=snsapi_base&state=null#wechat_redirect");
+			String redirect = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+					"appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex" +
+					"%3FstoreId%3D"+storeId;
+			if (StringUtil.isNotBlank(tableId)){
+				redirect = redirect + "%26tableId%3D"+tableId;
+			}
+			if (StringUtil.isNotBlank(uid)){
+				redirect = redirect + "%26uid%3D"+uid;
+			}
+			redirect = redirect+"&response_type=code&scope=snsapi_base&state=null#wechat_redirect";
+			response.sendRedirect(redirect);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@RequestMapping(value = "h5/index")
-	public ModelAndView sailindex(String code, String state, String msgId, HttpServletResponse response) {
-		System.out.println("index++++++++++++++"+msgId+"+++++++++++++++++++++++++");
+	public ModelAndView sailindex(String code, String state, String storeId, String tableId, String uid, HttpServletResponse response) {
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("wx/index");
-		System.out.println("indexUrl:"+request.getServerName());
 		try{
 			DefaultWechat wechat = new DefaultWechat();
 			wechat.setAppid(Context.WX_APPID);
 			wechat.setSecret(Context.WX_SECRET);
 			wechat.setTokenManager(tokenManager);
 			String openid = wechat.getOpenidByCode(code);
-			WechatParam wp = wechatDao.getWechat(Context.WX_APPID);
+			MpUser mpUser = wechat.getUser(openid);
+			ZmUser zmUser = msgDao.getUserByOpenId(openid);
+			if (zmUser==null){
+				zmUser.setId(IDGenerator.nextId());
+				zmUser.setOpen_id(openid);
+				zmUser.setHead_img(mpUser.getHeadimgurl());
+				zmUser.setName(mpUser.getNickname());
+				zmUser.setArea(mpUser.getCountry()+mpUser.getProvince()+mpUser.getCity());
+				zmUser.setSex(mpUser.getSex()==1?"male":"female");
+				msgDao.addZmUser(zmUser);
+
+
+			}
+
 			mav.addObject("openid", openid);
-			mav.addObject("msgId", msgId);
-			mav.addObject("minPay", wp.getMinPay());
+			mav.addObject("storeId", storeId);
+			mav.addObject("tableId", tableId);
+			mav.addObject("uid", uid);
 		}catch(MpException e){
 			if(e.getMessage().contains("40029")){
 				return mav;

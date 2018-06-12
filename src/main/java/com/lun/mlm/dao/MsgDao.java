@@ -2,6 +2,7 @@ package com.lun.mlm.dao;
 
 import com.lun.mlm.model.ZmBanner;
 import com.lun.mlm.model.ZmMsg;
+import com.lun.mlm.model.ZmUser;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
 public interface MsgDao {
     List<ZmBanner> listByStoreId(String storeId);
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
+    ZmUser getUserByOpenId(String openId);
+    void addZmUser(ZmUser zmUser);
 }
