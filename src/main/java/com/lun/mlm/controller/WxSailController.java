@@ -85,7 +85,11 @@ public class WxSailController extends BaseController  {
 				zmUser.setHead_img(mpUser.getHeadimgurl());
 				zmUser.setName(mpUser.getNickname());
 				zmUser.setArea(mpUser.getCountry()+mpUser.getProvince()+mpUser.getCity());
-				zmUser.setSex(mpUser.getSex()==1?"male":"female");
+				if (mpUser.getSex()!=null){
+					zmUser.setSex(mpUser.getSex()==1?"male":"female");
+				}else{
+					zmUser.setSex("unknown");
+				}
 				msgDao.addZmUser(zmUser);
 			}
 
