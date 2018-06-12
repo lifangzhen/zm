@@ -76,8 +76,8 @@ public class WxSailController extends BaseController  {
 	}
 	@RequestMapping(value = "h5/config")
 	@ResponseBody
-	public ApiResponse getConfig() {
-		String pageUrl = "http://"+request.getServerName()+"/h5/index";
+	public ApiResponse getConfig(String pageUrl) {
+//		String pageUrl = "http://"+request.getServerName()+"/h5/index";
 		System.out.println("pageUrl:"+pageUrl);
 		DefaultWechat wechat = new DefaultWechat();
 		wechat.setAppid(Context.WX_APPID);

@@ -76,6 +76,9 @@
     $(function(){
         $.ajax({
             type: 'POST',
+            data: {
+                pageUrl: location.href.split('#')[0]
+            },
             url:  '/h5/config',
             dataType:"json",
             success: function(data) {
