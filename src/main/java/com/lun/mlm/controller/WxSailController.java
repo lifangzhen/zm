@@ -51,6 +51,7 @@ public class WxSailController extends BaseController  {
 	@RequestMapping(value = "h5/redirect")
 	public void redirect(String msgId, HttpServletResponse response) {
 		try {
+			System.out.println("+++++++++++++++++++++++++++++++++++"+msgId+"+++++++++++++++++++++++++++++=");
 			response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex%3Fmsg%3D"+msgId+"&response_type=code&scope=snsapi_base&state=null#wechat_redirect");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,6 +60,7 @@ public class WxSailController extends BaseController  {
 
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, String msgId, HttpServletResponse response) {
+		System.out.println("index++++++++++++++"+msgId+"+++++++++++++++++++++++++");
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("/wx/index");
 		System.out.println("indexUrl:"+request.getServerName());
