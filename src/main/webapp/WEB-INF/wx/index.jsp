@@ -23,7 +23,7 @@
 <
 <input id="openid" name="openid" value="${openid}">
 
-<input id="msgId" name="msgId">
+<input id="msgId" name="msgId" value="${msgId}">
 
 <div class="toshopmark">
 	<a href="/mark.html">
@@ -96,16 +96,16 @@
 
 					wx.ready(function(){
                         wx.onMenuShareTimeline({
-                            title: 'type', // 分享标题
-                            link: 'http://zm.herison.com.cn/h5/redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            title: '我在[么么哒]的桌上刻了留言，你们造吗？', // 分享标题
+                            link: 'http://zm.herison.com.cn/h5/redirect?msgId='+$("#msgId").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 // 用户点击了分享后执行的回调函数
                             }
                         });
                         wx.onMenuShareAppMessage({
-                            title: 'type', // 分享标题
-                            link: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            title: '我在[么么哒]的桌上刻了留言，你们造吗？', // 分享标题
+                            link: 'http://zm.herison.com.cn/h5/redirect?msgId='+$("#msgId").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 // 用户点击了分享后执行的回调函数

@@ -49,16 +49,16 @@ public class WxSailController extends BaseController  {
 	@Autowired WechatDao wechatDao;
 	@Autowired OrderService orderService;
 	@RequestMapping(value = "h5/redirect")
-	public void redirect(HttpServletResponse response) {
+	public void redirect(String msgId, HttpServletResponse response) {
 		try {
-			response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect");
+			response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex%3Fmsg%3D"+msgId+"&response_type=code&scope=snsapi_base&state=null#wechat_redirect");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@RequestMapping(value = "h5/index")
-	public ModelAndView sailindex(String code, String state, HttpServletResponse response) {
+	public ModelAndView sailindex(String code, String state, String msgId, HttpServletResponse response) {
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("/wx/index");
 		System.out.println("indexUrl:"+request.getServerName());
@@ -68,11 +68,9 @@ public class WxSailController extends BaseController  {
 			wechat.setSecret(Context.WX_SECRET);
 			wechat.setTokenManager(tokenManager);
 			String openid = wechat.getOpenidByCode(code);
-			Member member = memberService.getMember(openid, true);
-			if(member==null) throw new MlmException("300", "请从客户端打开");
 			WechatParam wp = wechatDao.getWechat(Context.WX_APPID);
 			mav.addObject("openid", openid);
-			mav.addObject("rate", member.getGrade().getRate());
+			mav.addObject("msgId", msgId);
 			mav.addObject("minPay", wp.getMinPay());
 		}catch(MpException e){
 			if(e.getMessage().contains("40029")){
