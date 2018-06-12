@@ -57,7 +57,7 @@ public class WxSailController extends BaseController  {
 	public ModelAndView sailindex(String code, String state, String msgId, HttpServletResponse response) {
 		System.out.println("index++++++++++++++"+msgId+"+++++++++++++++++++++++++");
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
-		ModelAndView mav = new ModelAndView("wx/index1");
+		ModelAndView mav = new ModelAndView("wx/index");
 		System.out.println("indexUrl:"+request.getServerName());
 		try{
 			DefaultWechat wechat = new DefaultWechat();
