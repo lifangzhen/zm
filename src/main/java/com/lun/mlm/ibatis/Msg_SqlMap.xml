@@ -7,7 +7,31 @@
     <typeAlias alias="zmMsg" type="com.lun.mlm.model.ZmMsg"/>
 	<typeAlias alias="zmBanner" type="com.lun.mlm.model.ZmBanner"/>
 	<typeAlias alias="zmUser" type="com.lun.mlm.model.ZmUser"/>
+	<typeAlias alias="zmFriend" type="com.lun.mlm.model.ZmFriend"/>
 
+	<select id="getFriend" resultClass="zmFriend">
+		SELECT * FROM zm_friend m
+		WHERE m.user_id = #userId#
+		AND m.friend_user_id = #friendUserId#
+	</select>
+
+	<insert id="addZmFriend" parameterClass="zmFriend">
+		INSERT INTO zm_friend (
+		id,
+		user_id,
+		friend_user_id,
+		create_at,
+		update_at,
+		status
+		)
+		#id#,
+		#user_id#,
+		#friend_user_id#,
+		NOW(),
+		NOW(),
+		#status#
+		)
+	</insert>
 	<insert id="addZmUser" parameterClass="zmUser">
 		INSERT INTO zm_user (
 		id,

@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lun.mlm.dao.MsgDao;
-import com.lun.mlm.model.ZmBanner;
-import com.lun.mlm.model.ZmMsg;
-import com.lun.mlm.model.ZmUser;
+import com.lun.mlm.model.*;
 import com.lun.mlm.utils.ApiResponse;
 import com.lun.mlm.utils.IDGenerator;
 import com.townmc.mp.model.MpUser;
@@ -28,7 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lun.mlm.MlmException;
 import com.lun.mlm.dao.MemberDao;
 import com.lun.mlm.dao.WechatDao;
-import com.lun.mlm.model.WechatParam;
 import com.lun.mlm.service.MemberService;
 import com.lun.mlm.service.OrderService;
 import com.lun.mlm.utils.Context;
@@ -79,8 +76,9 @@ public class WxSailController extends BaseController  {
 			MpUser mpUser = wechat.getUser(openid);
 			ZmUser zmUser = msgDao.getUserByOpenId(openid);
 			if (zmUser==null){
+				String id = IDGenerator.nextId();
 				zmUser = new ZmUser();
-				zmUser.setId(IDGenerator.nextId());
+				zmUser.setId(id);
 				zmUser.setOpen_id(openid);
 				zmUser.setHead_img(mpUser.getHeadimgurl());
 				zmUser.setName(mpUser.getNickname());
@@ -91,9 +89,27 @@ public class WxSailController extends BaseController  {
 					zmUser.setSex("unknown");
 				}
 				msgDao.addZmUser(zmUser);
+
+				if (StringUtil.isNotBlank(uid)){
+					ZmFriend zmFriend = msgDao.getZmFriend(id, uid);
+					if (zmFriend==null){
+						ZmFriend zmFriend1 = new ZmFriend();
+						zmFriend1.setId(IDGenerator.nextId());
+						zmFriend1.setUser_id(id);
+						zmFriend1.setFriend_user_id(uid);
+						zmFriend1.setStatus(0);
+						msgDao.addZmFriend(zmFriend1);
+						ZmFriend zmFriend2 = new ZmFriend();
+						zmFriend2.setId(IDGenerator.nextId());
+						zmFriend2.setUser_id(uid);
+						zmFriend2.setFriend_user_id(id);
+						zmFriend2.setStatus(0);
+						msgDao.addZmFriend(zmFriend2);
+					}
+
+				}
 			}
 
-			mav.addObject("openid", openid);
 			mav.addObject("storeId", storeId);
 			mav.addObject("tableId", tableId);
 			mav.addObject("uid", uid);

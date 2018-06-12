@@ -2,6 +2,7 @@ package com.lun.mlm.dao.impl;
 
 import com.lun.mlm.dao.MsgDao;
 import com.lun.mlm.model.ZmBanner;
+import com.lun.mlm.model.ZmFriend;
 import com.lun.mlm.model.ZmMsg;
 import com.lun.mlm.model.ZmUser;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
@@ -43,5 +44,18 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
     @Override
     public void addZmUser(ZmUser zmUser) {
         this.getSqlMapClientTemplate().insert("Msg_SqlMap.addZmUser", zmUser);
+    }
+
+    @Override
+    public void addZmFriend(ZmFriend zmFriend) {
+        this.getSqlMapClientTemplate().insert("Msg_SqlMap.addZmFriend", zmFriend);
+    }
+
+    @Override
+    public ZmFriend getZmFriend(String userId, String friendUserId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", userId);
+        map.put("friendUserId", friendUserId);
+        return (ZmFriend) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.getFriend", map);
     }
 }

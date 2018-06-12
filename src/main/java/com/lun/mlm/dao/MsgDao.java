@@ -1,6 +1,7 @@
 package com.lun.mlm.dao;
 
 import com.lun.mlm.model.ZmBanner;
+import com.lun.mlm.model.ZmFriend;
 import com.lun.mlm.model.ZmMsg;
 import com.lun.mlm.model.ZmUser;
 
@@ -15,4 +16,6 @@ public interface MsgDao {
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
     ZmUser getUserByOpenId(String openId);
     void addZmUser(ZmUser zmUser);
+    void addZmFriend(ZmFriend zmFriend);
+    ZmFriend getZmFriend(String userId, String friendUserId);
 }
