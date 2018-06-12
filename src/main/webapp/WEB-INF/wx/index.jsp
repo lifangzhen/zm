@@ -23,6 +23,8 @@
 <
 <input id="openid" name="openid" value="${openid}">
 
+<input id="msgId" name="msgId">
+
 <div class="toshopmark">
 	<a href="/mark.html">
 		<span><img src="/assets/back.png"></span>
@@ -89,13 +91,13 @@
 						timestamp: data.data.timestamp, // 必填，生成签名的时间戳
 						nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
 						signature: data.data.signature,// 必填，签名，见附录1
-						jsApiList: ['onMenuShareAppMessage','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+						jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 					});
 
 					wx.ready(function(){
                         wx.onMenuShareTimeline({
                             title: 'type', // 分享标题
-                            link: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%zm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            link: 'http://zm.herison.com.cn/h5/redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 // 用户点击了分享后执行的回调函数
@@ -103,7 +105,7 @@
                         });
                         wx.onMenuShareAppMessage({
                             title: 'type', // 分享标题
-                            link: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%zm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            link: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 // 用户点击了分享后执行的回调函数

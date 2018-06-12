@@ -48,6 +48,14 @@ public class WxSailController extends BaseController  {
 	@Autowired MemberDao memberDao;
 	@Autowired WechatDao wechatDao;
 	@Autowired OrderService orderService;
+	@RequestMapping(value = "h5/redirect")
+	public void redirect(HttpServletResponse response) {
+		try {
+			response.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx85b3700a9516c64f&redirect_uri=http%3A%2F%2Fzm.herison.com.cn%2Fh5%2Findex&response_type=code&scope=snsapi_base&state=null#wechat_redirect");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, HttpServletResponse response) {
