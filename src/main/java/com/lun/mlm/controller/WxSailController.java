@@ -51,28 +51,26 @@ public class WxSailController extends BaseController  {
 
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, HttpServletResponse response) {
-//		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
-//		ModelAndView mav = new ModelAndView("/wx/index");
-//		try{
-//			DefaultWechat wechat = new DefaultWechat();
-//			wechat.setAppid(Context.WX_APPID);
-//			wechat.setSecret(Context.WX_SECRET);
-//			wechat.setTokenManager(tokenManager);
-//			String openid = wechat.getOpenidByCode(code);
-//			Member member = memberService.getMember(openid, true);
-//			if(member==null) throw new MlmException("300", "请从客户端打开");
-//			WechatParam wp = wechatDao.getWechat(Context.WX_APPID);
-//			mav.addObject("openid", openid);
-//			mav.addObject("rate", member.getGrade().getRate());
-//			mav.addObject("minPay", wp.getMinPay());
-//		}catch(MpException e){
-//			if(e.getMessage().contains("40029")){
-//				return mav;
-//			}
-//		}
-
+		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("/wx/index");
-		mav.addObject("openid", "lfz-openid");
+		try{
+			DefaultWechat wechat = new DefaultWechat();
+			wechat.setAppid(Context.WX_APPID);
+			wechat.setSecret(Context.WX_SECRET);
+			wechat.setTokenManager(tokenManager);
+			String openid = wechat.getOpenidByCode(code);
+			Member member = memberService.getMember(openid, true);
+			if(member==null) throw new MlmException("300", "请从客户端打开");
+			WechatParam wp = wechatDao.getWechat(Context.WX_APPID);
+			mav.addObject("openid", openid);
+			mav.addObject("rate", member.getGrade().getRate());
+			mav.addObject("minPay", wp.getMinPay());
+		}catch(MpException e){
+			if(e.getMessage().contains("40029")){
+				return mav;
+			}
+		}
+		
 		return mav;
 	}
 	@RequestMapping(value = "h5/config")
