@@ -53,6 +53,7 @@ public class WxSailController extends BaseController  {
 	public ModelAndView sailindex(String code, String state, HttpServletResponse response) {
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("/wx/index");
+		System.out.println("indexUrl:"+request.getServerName());
 		try{
 			DefaultWechat wechat = new DefaultWechat();
 			wechat.setAppid(Context.WX_APPID);
@@ -70,13 +71,14 @@ public class WxSailController extends BaseController  {
 				return mav;
 			}
 		}
-		
+
 		return mav;
 	}
 	@RequestMapping(value = "h5/config")
 	@ResponseBody
 	public ApiResponse get() {
 		String pageUrl = "http://"+request.getServerName()+"/h5/index";
+		System.out.println("pageUrl:"+pageUrl);
 		DefaultWechat wechat = new DefaultWechat();
 		wechat.setAppid(Context.WX_APPID);
 		wechat.setSecret(Context.WX_SECRET);
