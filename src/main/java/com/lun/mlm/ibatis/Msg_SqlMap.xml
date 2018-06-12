@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Msg_SqlMap">
+    
+    <typeAlias alias="zmMsg" type="com.lun.mlm.model.ZmMsg"/>
+    
+    <select id="list"  resultClass="zmMsg">
+    	SELECT * FROM zm_msg m
+		WHERE m.store_id = #storeId#
+		<isNotEmpty property="tableId">
+			AND m.table_id = #tableId#
+		</isNotEmpty>
+        ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+    </select>
+    
+</sqlMap>

@@ -10,4 +10,5 @@
     <sqlMap resource="com/lun/mlm/ibatis/Order_SqlMap.xml" />
     <sqlMap resource="com/lun/mlm/ibatis/Member_SqlMap.xml" />
     <sqlMap resource="com/lun/mlm/ibatis/Wx_SqlMap.xml" />
+    <sqlMap resource="com/lun/mlm/ibatis/Msg_SqlMap.xml" />
 </sqlMapConfig>

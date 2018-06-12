@@ -13,6 +13,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lun.mlm.dao.MsgDao;
 import com.lun.mlm.model.ZmMsg;
 import com.lun.mlm.utils.ApiResponse;
 import com.townmc.mp.json.JSONObject;
@@ -48,6 +49,8 @@ public class WxSailController extends BaseController  {
 	@Autowired MemberDao memberDao;
 	@Autowired WechatDao wechatDao;
 	@Autowired OrderService orderService;
+	@Autowired
+	MsgDao msgDao;
 	@RequestMapping(value = "h5/redirect")
 	public void redirect(String msgId, HttpServletResponse response) {
 		try {
@@ -85,8 +88,6 @@ public class WxSailController extends BaseController  {
 	@RequestMapping(value = "h5/config")
 	@ResponseBody
 	public ApiResponse getConfig(String pageUrl) {
-//		String pageUrl = "http://"+request.getServerName()+"/h5/index";
-		System.out.println("pageUrl:"+pageUrl);
 		DefaultWechat wechat = new DefaultWechat();
 		wechat.setAppid(Context.WX_APPID);
 		wechat.setSecret(Context.WX_SECRET);
@@ -95,25 +96,20 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success(re);
 	}
 
-	@RequestMapping(value = "h5/msg/{storeId}/{tableId}")
+	@RequestMapping(value = "h5/msg/{storeId}/{tableId}/{page}")
 	@ResponseBody
-	public ApiResponse test(@PathVariable("storeId") String storeId,
-							@PathVariable("tableId") String tableId) {
-		System.out.println(storeId+":"+tableId);
-		List<ZmMsg> list = new ArrayList<ZmMsg>();
-		for (int i=0;i<10;i++){
-			ZmMsg zmMsg = new ZmMsg();
-			zmMsg.setId("000"+i);
-			zmMsg.setUser_id("000"+i);
-			zmMsg.setTable_id("000"+i);
-			zmMsg.setStore_id("000"+i);
-			zmMsg.setDetail("我是00"+i+",这是我的留言，哈哈哈哈哈哈哈哈哈哈哈哈哈哈");
-			zmMsg.setShare_count(i*i);
-			zmMsg.setPraize_count(i);
-			zmMsg.setComment_count(i+i);
-			zmMsg.setStatus(0);
-			list.add(zmMsg);
-		}
+	public ApiResponse tablemsg(@PathVariable("storeId") String storeId,
+							@PathVariable("tableId") String tableId,
+							@PathVariable("page") Integer page) {
+		List<ZmMsg> list = msgDao.listByStoreIdAndTableId(storeId, tableId, page);
+		return ApiResponse.success(list);
+	}
+
+	@RequestMapping(value = "h5/msg/{storeId}/{page}")
+	@ResponseBody
+	public ApiResponse storemsg(@PathVariable("storeId") String storeId,
+							@PathVariable("page") Integer page) {
+		List<ZmMsg> list = msgDao.listByStoreIdAndTableId(storeId, null, page);
 		return ApiResponse.success(list);
 	}
 	
