@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+    configDebug="true">
+
+    <!-- 以同步方式记录日志 -->
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+        <param name="encoding" value="UTF-8" />
+        <!-- <appender-ref ref="LOGFILE_DAILY" /> -->
+        <appender-ref ref="CONSOLE" />
+    </appender>
+
+    <!-- 输出到控制台 -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] (%F:%L) - %m%n" />
+        </layout>
+    </appender>
+
+    <!-- 输出到文件 -->
+    <appender name="LOGFILE" class="org.apache.log4j.FileAppender">
+        <param name="File" value="./logs/mlm.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] (%F:%L) - %m%n" />
+        </layout>
+    </appender>
+
+    <!-- 输出到日志文件 每天一个日志 -->
+    <appender name="LOGFILE_DAILY" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="./logs/mlm" />
+        <param name="DatePattern" value="'_'yyyy-MM-dd'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%t] (%F:%L) - %m%n" />
+        </layout>
+    </appender>
+
+    <!-- 发邮件（只有ERROR时才会发送！） -->
+    <appender name="MAIL" class="org.apache.log4j.net.SMTPAppender">
+        <param name="Threshold" value="debug" />
+        <!-- 日志的错误级别 <param name="threshold" value="fatal"/> -->
+        <!-- 缓存文件大小，日志达到512K时发送Email -->
+        <param name="BufferSize" value="512" /><!-- 单位K -->
+        <param name="From" value="fatalwing@163.com" />
+        <param name="SMTPHost" value="smtp.163.com" />
+        <param name="Subject" value="wechat-log4jMessage" />
+        <param name="To" value="fatalwing@163.com" />
+        <param name="SMTPUsername" value="test" />
+        <param name="SMTPPassword" value="test" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%p]-[%c] %m%n" />
+        </layout>
+    </appender>
+
+    <!-- 输出对象和级别配置 -->
+    <logger name="com.lun" additivity="false">
+        <priority value="debug" />
+        <appender-ref ref="ASYNC" />
+    </logger>
+    
+    <logger name="com.ibatis" additivity="true"> 
+	<level value="DEBUG" /> 
+	</logger> 
+	<logger name="java.sql.Connection" additivity="true"> 
+	<level value="DEBUG" /> 
+	</logger> 
+	<logger name="java.sql.Statement" additivity="true"> 
+	<level value="DEBUG" /> 
+	</logger> 
+	<logger name="java.sql.PreparedStatement" additivity="true"> 
+	<level value="DEBUG" /> 
+	<appender-ref ref="IBatis" /> 
+	</logger> 
+	<logger name="java.sql.ResultSet" additivity="true"> 
+	<level value="DEBUG" /> 
+	<appender-ref ref="IBatis" /> 
+	</logger> 
+
+    <root>
+        <priority value="info" />
+        <appender-ref ref="ASYNC" />
+    </root>
+</log4j:configuration>
