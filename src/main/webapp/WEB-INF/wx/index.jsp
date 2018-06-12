@@ -100,7 +100,7 @@
                             link: 'http://zm.herison.com.cn/h5/redirect?msgId='+$("#msgId").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
-                                // 用户点击了分享后执行的回调函数
+                                alert();
                             }
                         });
                         wx.onMenuShareAppMessage({
