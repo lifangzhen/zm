@@ -173,6 +173,11 @@
 	</div>
 
 </div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery.endless-scroll-1.3.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/unslider.min.js"></script>
+<script src="/js/shopMark.js"></script>
 <script>
     $(function(){
         $.ajax({
@@ -229,11 +234,5 @@
 
 </script>
 
-
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/jquery.endless-scroll-1.3.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/unslider.min.js"></script>
-<script src="/js/shopMark.js"></script>
 </body>
 </html>

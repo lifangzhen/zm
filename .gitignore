@@ -6,6 +6,8 @@ nohup.out
 */out
 *.DS_Store
 
+target/*
+
 lunch.sql
 *.properties
 
