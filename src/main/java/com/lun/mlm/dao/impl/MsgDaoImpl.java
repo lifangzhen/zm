@@ -35,7 +35,7 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
 
     @Override
     public ZmUser getUserByOpenId(String openId) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("openId", openId);
         return (ZmUser) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.getUserByOpenId", map);
     }
