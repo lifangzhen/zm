@@ -79,6 +79,7 @@ public class WxSailController extends BaseController  {
 			MpUser mpUser = wechat.getUser(openid);
 			ZmUser zmUser = msgDao.getUserByOpenId(openid);
 			if (zmUser==null){
+				zmUser = new ZmUser();
 				zmUser.setId(IDGenerator.nextId());
 				zmUser.setOpen_id(openid);
 				zmUser.setHead_img(mpUser.getHeadimgurl());
@@ -86,8 +87,6 @@ public class WxSailController extends BaseController  {
 				zmUser.setArea(mpUser.getCountry()+mpUser.getProvince()+mpUser.getCity());
 				zmUser.setSex(mpUser.getSex()==1?"male":"female");
 				msgDao.addZmUser(zmUser);
-
-
 			}
 
 			mav.addObject("openid", openid);
