@@ -1,6 +1,7 @@
 package com.lun.mlm.dao.impl;
 
 import com.lun.mlm.dao.MsgDao;
+import com.lun.mlm.model.ZmBanner;
 import com.lun.mlm.model.ZmMsg;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,13 @@ import java.util.Map;
  */
 @Repository("msgDao")
 public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
+    @Override
+    public List<ZmBanner> listByStoreId(String storeId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("storeId", storeId);
+        return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listBanner", map);
+    }
+
     public List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("storeId", storeId);

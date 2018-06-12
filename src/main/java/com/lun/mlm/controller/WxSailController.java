@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lun.mlm.dao.MsgDao;
+import com.lun.mlm.model.ZmBanner;
 import com.lun.mlm.model.ZmMsg;
 import com.lun.mlm.utils.ApiResponse;
 import org.dom4j.Document;
@@ -104,6 +105,15 @@ public class WxSailController extends BaseController  {
 		List<ZmMsg> list = msgDao.listByStoreIdAndTableId(storeId, null, page);
 		return ApiResponse.success(list);
 	}
+
+	@RequestMapping(value = "h5/banner/{storeId}")
+	@ResponseBody
+	public ApiResponse listBanner(@PathVariable("storeId") String storeId) {
+		List<ZmBanner> list = msgDao.listByStoreId(storeId);
+		return ApiResponse.success(list);
+	}
+
+
 	
 	@RequestMapping(value = "h5/h5index")
 	public ModelAndView h5index() {

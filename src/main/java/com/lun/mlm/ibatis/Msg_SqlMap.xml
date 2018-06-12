@@ -5,6 +5,12 @@
 <sqlMap namespace="Msg_SqlMap">
     
     <typeAlias alias="zmMsg" type="com.lun.mlm.model.ZmMsg"/>
+	<typeAlias alias="zmBanner" type="com.lun.mlm.model.ZmBanner"/>
+
+	<select id="listBanner"  resultClass="zmBanner">
+		SELECT * FROM zm_banner m
+		WHERE m.store_id = #storeId#
+	</select>
     
     <select id="list"  resultClass="zmMsg">
     	SELECT * FROM zm_msg m
