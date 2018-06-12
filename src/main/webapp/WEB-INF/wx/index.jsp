@@ -22,7 +22,9 @@
 </div>
 <
 <input id="openid" name="openid" value="${openid}">
-
+<input id="uid" name="uid" value="${uid}">
+<input id="storeId" name="storeId" value="${storeId}">
+<input id="tableId" name="tableId" value="${tableId}">
 <input id="msgId" name="msgId" value="${msgId}">
 
 <div class="toshopmark">

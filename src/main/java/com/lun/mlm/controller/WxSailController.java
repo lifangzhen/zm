@@ -108,11 +108,11 @@ public class WxSailController extends BaseController  {
 					}
 
 				}
+				mav.addObject("uid", id);
 			}
 
 			mav.addObject("storeId", storeId);
 			mav.addObject("tableId", tableId);
-			mav.addObject("uid", uid);
 		}catch(MpException e){
 			if(e.getMessage().contains("40029")){
 				return mav;
