@@ -75,8 +75,9 @@ public class WxSailController extends BaseController  {
 			String openid = wechat.getOpenidByCode(code);
 			MpUser mpUser = wechat.getUser(openid);
 			ZmUser zmUser = msgDao.getUserByOpenId(openid);
+			String id = "";
 			if (zmUser==null){
-				String id = IDGenerator.nextId();
+				id = IDGenerator.nextId();
 				zmUser = new ZmUser();
 				zmUser.setId(id);
 				zmUser.setOpen_id(openid);
@@ -108,9 +109,11 @@ public class WxSailController extends BaseController  {
 					}
 
 				}
-				mav.addObject("uid", id);
+			}else{
+				id = zmUser.getId();
 			}
 
+			mav.addObject("uid", id);
 			mav.addObject("storeId", storeId);
 			mav.addObject("tableId", tableId);
 		}catch(MpException e){
