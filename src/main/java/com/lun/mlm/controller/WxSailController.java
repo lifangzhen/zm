@@ -2,10 +2,6 @@ package com.lun.mlm.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.lun.mlm.dao.MsgDao;
 import com.lun.mlm.model.ZmMsg;
 import com.lun.mlm.utils.ApiResponse;
-import com.townmc.mp.json.JSONObject;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -28,14 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lun.mlm.MlmException;
 import com.lun.mlm.dao.MemberDao;
-import com.lun.mlm.dao.OrderDao;
 import com.lun.mlm.dao.WechatDao;
-import com.lun.mlm.model.Member;
 import com.lun.mlm.model.WechatParam;
 import com.lun.mlm.service.MemberService;
 import com.lun.mlm.service.OrderService;
 import com.lun.mlm.utils.Context;
-import com.lun.mlm.web.annotations.TcResponseBody;
 import com.townmc.mp.DefaultWechat;
 import com.townmc.mp.MpException;
 import com.townmc.mp.TokenManager;
@@ -65,7 +57,7 @@ public class WxSailController extends BaseController  {
 	public ModelAndView sailindex(String code, String state, String msgId, HttpServletResponse response) {
 		System.out.println("index++++++++++++++"+msgId+"+++++++++++++++++++++++++");
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
-		ModelAndView mav = new ModelAndView("/wx/index");
+		ModelAndView mav = new ModelAndView("wx/index1");
 		System.out.println("indexUrl:"+request.getServerName());
 		try{
 			DefaultWechat wechat = new DefaultWechat();
@@ -116,7 +108,7 @@ public class WxSailController extends BaseController  {
 	@RequestMapping(value = "h5/h5index")
 	public ModelAndView h5index() {
 		WechatParam wp = wechatDao.getWechat(Context.WX_APPID);
-		ModelAndView mav = new ModelAndView("/wx/index");
+		ModelAndView mav = new ModelAndView("wx/index1");
 		mav.addObject("minPay", wp.getMinPay());
 		return mav;
 	}
