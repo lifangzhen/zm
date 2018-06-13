@@ -57,6 +57,8 @@ public class WxSailController extends BaseController  {
 				redirect = redirect + "%26uid%3D"+uid;
 			}
 			redirect = redirect+"&response_type=code&scope=snsapi_userinfo&state=null#wechat_redirect";
+
+			System.out.println("redirect:++++++++++++++++"+redirect+"+++++++++++++++++++++");
 			response.sendRedirect(redirect);
 		} catch (IOException e) {
 			e.printStackTrace();
