@@ -78,6 +78,7 @@
 <script src="/js/shopMark.js"></script>
 <script>
     $(function(){
+        var linkUrl = "http://zm.herison.com.cn/h5/redirect?storeId="+$("#storeId").val()+"&tableId="+$("#tableId").val()+"&uid="+$("#uid").val();
         $.ajax({
             type: 'POST',
             data: {
@@ -99,7 +100,7 @@
 					wx.ready(function(){
                         wx.onMenuShareTimeline({
                             title: '我在[么么哒]的桌上刻了留言，你们造吗？', // 分享标题
-                            link: 'http://zm.herison.com.cn/h5/redirect?storeId='+$("#storeId").val()+'&tableId='+$("#tableId").val()+'&uid='+$("#uid").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            link: linkUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 alert();
@@ -107,7 +108,7 @@
                         });
                         wx.onMenuShareAppMessage({
                             title: '我在[么么哒]的桌上刻了留言，你们造吗？', // 分享标题
-                            link: 'http://zm.herison.com.cn/h5/redirect?msgId='+$("#msgId").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
+                            link: "http://zm.herison.com.cn/h5/redirect?storeId="+$("#storeId").val()+"&tableId="+$("#tableId").val()+"&uid="+$("#uid").val(), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一>致
                             imgUrl: 'http://pic.herison.com.cn/1.png', // 分享图标
                             success: function () {
                                 // 用户点击了分享后执行的回调函数
