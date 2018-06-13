@@ -14,10 +14,13 @@ import com.lun.mlm.model.*;
 import com.lun.mlm.utils.ApiResponse;
 import com.lun.mlm.utils.IDGenerator;
 import com.townmc.mp.model.MpUser;
+import com.townmc.mp.model.Token;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +40,7 @@ import com.wxopen.util.StringUtil;
 
 @Controller
 public class WxSailController extends BaseController  {
+	private Logger logger = LoggerFactory.getLogger(WxSailController.class);
 	@Autowired TokenManager tokenManager;
 	@Autowired MemberService memberService;
 	@Autowired MemberDao memberDao;
@@ -44,6 +48,7 @@ public class WxSailController extends BaseController  {
 	@Autowired OrderService orderService;
 	@Autowired
 	MsgDao msgDao;
+
 	@RequestMapping(value = "h5/redirect")
 	public void redirect(String storeId,String tableId, String uid, HttpServletResponse response) {
 		try {
@@ -67,6 +72,7 @@ public class WxSailController extends BaseController  {
 
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, String storeId, String tableId, String uid, HttpServletResponse response) {
+		logger.info("index----storeId:"+storeId+"+++tableId:"+tableId+"++++uid:"+uid);
 		if(StringUtil.isBlank(code)) throw new MlmException("300", "code获取失败");
 		ModelAndView mav = new ModelAndView("wx/index");
 		try{
@@ -94,8 +100,10 @@ public class WxSailController extends BaseController  {
 				msgDao.addZmUser(zmUser);
 
 				if (StringUtil.isNotBlank(uid)){
+					logger.info("++++id:"+id+"+++++uid:"+uid);
 					ZmFriend zmFriend = msgDao.getZmFriend(id, uid);
 					if (zmFriend==null){
+						logger.info("+++++++zmfriend is null+++++");
 						ZmFriend zmFriend1 = new ZmFriend();
 						zmFriend1.setId(IDGenerator.nextId());
 						zmFriend1.setUser_id(id);
