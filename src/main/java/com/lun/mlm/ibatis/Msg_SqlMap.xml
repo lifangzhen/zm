@@ -23,7 +23,7 @@
 		create_at,
 		update_at,
 		status
-		)
+		)values(
 		#id#,
 		#user_id#,
 		#friend_user_id#,
