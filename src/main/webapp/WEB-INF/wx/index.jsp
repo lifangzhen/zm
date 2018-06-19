@@ -33,13 +33,13 @@
       }
   </script>
 
-  <link href="/dva-antd-mobile-starter/index.8f45860b.css" rel="stylesheet"></head>
+  <link href="/index.8f45860b.css" rel="stylesheet"></head>
 <body>
 <input id="uid" value="${uid}" style="display:none;"/>
 <input id="storeId" value="${storeId}" style="display:none;"/>
 <input id="tableId" value="${tableId}" style="display:none;"/>
 <div id="root"></div>
 
-<script type="text/javascript" src="/dva-antd-mobile-starter/common.592300fd203fb2cdcd9b.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.aa1bea99.js"></script></body>
+<script type="text/javascript" src="/common.592300fd203fb2cdcd9b.js"></script><script type="text/javascript" src="/index.aa1bea99.js"></script></body>
 </html>
 

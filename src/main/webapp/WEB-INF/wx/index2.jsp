@@ -33,8 +33,8 @@
         }
 	</script>
 
-	<link href="/dva-antd-mobile-starter/index.aea46ad8.css" rel="stylesheet"></head>
+	<link href="/index.aea46ad8.css" rel="stylesheet"></head>
 <body>
 <div id="root"></div>
-<script type="text/javascript" src="/dva-antd-mobile-starter/common.c381defc682d474b3d08.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.aa1bea99.js"></script></body>
+<script type="text/javascript" src="/common.c381defc682d474b3d08.js"></script><script type="text/javascript" src="/index.aa1bea99.js"></script></body>
 </html>

@@ -70,6 +70,15 @@ public class WxSailController extends BaseController  {
 		}
 	}
 
+	@RequestMapping(value = "h5/index/test")
+	public ModelAndView test() {
+		ModelAndView mav = new ModelAndView("wx/index");
+		mav.addObject("uid", "abc001");
+		mav.addObject("storeId", "001");
+		mav.addObject("tableId", "001");
+		return mav;
+	}
+
 
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, String storeId, String tableId, String uid, HttpServletResponse response) {
