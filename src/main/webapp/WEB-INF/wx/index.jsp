@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" data-scale="true">
 <head>
@@ -37,7 +38,11 @@
 <!--   <input id="uid" value="001" style="display:none;"/>
   <input id="storeId" value="002" style="display:none;"/>
   <input id="tableId" value="003" style="display:none;"/> -->
-  <div id="root"></div>
+  <div id="root">
+    <input id="uid" name="uid" value="${uid}" style="display:none;"/>
+    <input id="storeId" name="storeId" value="${storeId}" style="display:none;"/>
+    <input id="tableId" name="tableId" value="${tableId}" style="display:none;"/>
+  </div>
   
 <script type="text/javascript" src="/dva-antd-mobile-starter/common.5b446df7888b9ceee956.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.aa1bea99.js"></script></body>
 </html>
