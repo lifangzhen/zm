@@ -70,6 +70,7 @@ public class WxSailController extends BaseController  {
 		}
 	}
 
+
 	@RequestMapping(value = "h5/index")
 	public ModelAndView sailindex(String code, String state, String storeId, String tableId, String uid, HttpServletResponse response) {
 		logger.info("index----storeId:"+storeId+"+++tableId:"+tableId+"++++uid:"+uid);
