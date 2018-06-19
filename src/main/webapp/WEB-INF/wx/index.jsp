@@ -23,26 +23,23 @@
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script src="//as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-    if(!window.Promise) {
-      document.writeln('<script src="//as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
-    }
+      if ('addEventListener' in document) {
+          document.addEventListener('DOMContentLoaded', function() {
+              FastClick.attach(document.body);
+          }, false);
+      }
+      if(!window.Promise) {
+          document.writeln('<script src="//as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+      }
   </script>
-  
-<link href="/dva-antd-mobile-starter/index.aea46ad8.css" rel="stylesheet"></head>
+
+  <link href="/dva-antd-mobile-starter/index.8f45860b.css" rel="stylesheet"></head>
 <body>
-<!--   <input id="uid" value="001" style="display:none;"/>
-  <input id="storeId" value="002" style="display:none;"/>
-  <input id="tableId" value="003" style="display:none;"/> -->
-  <div id="root">
-    <input id="uid" name="uid" value="${uid}" style="display:none;"/>
-    <input id="storeId" name="storeId" value="${storeId}" style="display:none;"/>
-    <input id="tableId" name="tableId" value="${tableId}" style="display:none;"/>
-  </div>
-  
-<script type="text/javascript" src="/dva-antd-mobile-starter/common.5b446df7888b9ceee956.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.aa1bea99.js"></script></body>
+<input id="uid" value="${uid}" style="display:none;"/>
+<input id="storeId" value="${storeId}" style="display:none;"/>
+<input id="tableId" value="${tableId}" style="display:none;"/>
+<div id="root"></div>
+
+<script type="text/javascript" src="/dva-antd-mobile-starter/common.592300fd203fb2cdcd9b.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.aa1bea99.js"></script></body>
 </html>
+
