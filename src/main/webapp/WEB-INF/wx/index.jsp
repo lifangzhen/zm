@@ -99,8 +99,9 @@
         WeixinJSBridge.call('hideOptionMenu');
     });
 </script>
-<script type="text/javascript" src="/common.fb7d1e1aac8b481108a1.js"></script><script type="text/javascript" src="/index.01cc5e95.js"></script></body>
+<script type="text/javascript" src="/common.37f3a082f1564e75d14c.js"></script><script type="text/javascript" src="/index.01cc5e95.js"></script></body>
 </html>
+
 
 
 
