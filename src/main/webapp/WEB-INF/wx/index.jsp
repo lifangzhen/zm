@@ -10,6 +10,8 @@
   <!-- <link rel="dns-prefetch" href="//xlsdg.github.io" /> -->
 
   <meta name="format-detection" content="telephone=no,email=no" />
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
   <!-- <link type="image/x-icon" rel="icon" href="/favicon.ico" />
   <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
