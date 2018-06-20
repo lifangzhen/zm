@@ -33,7 +33,7 @@
       }
   </script>
 
-  <link href="/dva-antd-mobile-starter/index.4b2551e5.css" rel="stylesheet"></head>
+  <link href="/index.4b2551e5.css" rel="stylesheet"></head>
 <body>
 <input id="uid" value="${uid}" style="display:none;"/>
 <input id="storeId" value="${storeId}" style="display:none;"/>
@@ -53,7 +53,7 @@
             success: function(data) {
                 if(data.errorCode==0){
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: data.data.appId, // 必填，公众号的唯一标识
                         timestamp: data.data.timestamp, // 必填，生成签名的时间戳
                         nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
@@ -93,7 +93,7 @@
     });
 
 </script>
-<script type="text/javascript" src="/dva-antd-mobile-starter/common.fc2bc85b02638f6200f2.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.9cd11c0f.js"></script></body>
+<script type="text/javascript" src="/common.fc2bc85b02638f6200f2.js"></script><script type="text/javascript" src="/index.9cd11c0f.js"></script></body>
 </html>
 
 
