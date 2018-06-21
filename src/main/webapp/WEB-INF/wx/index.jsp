@@ -10,8 +10,6 @@
   <!-- <link rel="dns-prefetch" href="//xlsdg.github.io" /> -->
 
   <meta name="format-detection" content="telephone=no,email=no" />
-  <meta name="apple-touch-fullscreen" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
 
   <!-- <link type="image/x-icon" rel="icon" href="/favicon.ico" />
   <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
@@ -20,6 +18,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
   <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -35,7 +35,7 @@
       }
   </script>
 
-  <link href="/index.31e2bcf5.css" rel="stylesheet"></head>
+  <link href="/dva-antd-mobile-starter/index.31e2bcf5.css" rel="stylesheet"></head>
 <body>
 <input id="uid" value="${uid}" style="display:none;"/>
 <input id="storeId" value="${storeId}" style="display:none;"/>
@@ -55,7 +55,7 @@
             success: function(data) {
                 if(data.errorCode==0){
                     wx.config({
-                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: data.data.appId, // 必填，公众号的唯一标识
                         timestamp: data.data.timestamp, // 必填，生成签名的时间戳
                         nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
@@ -95,14 +95,16 @@
     });
 
 </script>
-<script>
-    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-        WeixinJSBridge.call('hideToolbar');
-        WeixinJSBridge.call('hideOptionMenu');
-    });
-</script>
-<script type="text/javascript" src="/common.37f3a082f1564e75d14c.js"></script><script type="text/javascript" src="/index.01cc5e95.js"></script></body>
+<!-- <script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+    WeixinJSBridge.call('hideOptionMenu');
+});
+</script>  -->
+<script type="text/javascript" src="/dva-antd-mobile-starter/common.d633d70b66b2ce6c273f.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.01cc5e95.js"></script></body>
 </html>
+
+
 
 
 
