@@ -222,6 +222,13 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success();
 	}
 
+	@RequestMapping(value = "h5/user/info")
+	@ResponseBody
+	public ApiResponse userInfo(@RequestParam(value = "userId", required = true) String userId) {
+		ZmUser zmUser = msgDao.getUserById(userId);
+		return ApiResponse.success(zmUser);
+	}
+
 
 
 

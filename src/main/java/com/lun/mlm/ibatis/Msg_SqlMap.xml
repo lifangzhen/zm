@@ -62,6 +62,11 @@
 		WHERE m.open_id = #openId#
 	</select>
 
+	<select id="getUserById" resultClass="zmUser">
+		SELECT * FROM zm_user m
+		WHERE m.id = #id#
+	</select>
+
 	<select id="listBanner"  resultClass="zmBanner">
 		SELECT * FROM zm_banner m
 		WHERE m.store_id = #storeId#

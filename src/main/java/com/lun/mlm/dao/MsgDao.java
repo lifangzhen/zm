@@ -16,6 +16,7 @@ public interface MsgDao {
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
     List<ZmMsg> listByStoreIdAndTableIdAndMsgId(String storeId, String tableId, String msgId, Integer page);
     ZmUser getUserByOpenId(String openId);
+    ZmUser getUserById(String id);
     void addZmUser(ZmUser zmUser);
     void addZmFriend(ZmFriend zmFriend);
     ZmFriend getZmFriend(String userId, String friendUserId);
