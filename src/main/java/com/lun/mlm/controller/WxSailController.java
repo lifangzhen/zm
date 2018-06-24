@@ -154,6 +154,12 @@ public class WxSailController extends BaseController  {
 		Map<String, Object> re = wechat.getJsConfig(Context.WX_APPID, pageUrl);
 		return ApiResponse.success(re);
 	}
+	@RequestMapping(value = "h5/banner/{storeId}")
+	@ResponseBody
+	public ApiResponse listBanner(@PathVariable("storeId") String storeId) {
+		List<ZmBanner> list = msgDao.listByStoreId(storeId);
+		return ApiResponse.success(list);
+	}
 
 	@RequestMapping(value = "h5/msg/{storeId}/{tableId}/{page}")
 	@ResponseBody
@@ -172,15 +178,99 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success(list);
 	}
 
-	@RequestMapping(value = "h5/banner/{storeId}")
+	@RequestMapping(value = "h5/msg/{storeId}/{tableId}/{msgId}/{page}")
 	@ResponseBody
-	public ApiResponse listBanner(@PathVariable("storeId") String storeId) {
-		List<ZmBanner> list = msgDao.listByStoreId(storeId);
+	public ApiResponse tablemsgReply(@PathVariable("storeId") String storeId,
+								@PathVariable("tableId") String tableId,
+									 @PathVariable("msgId") String msgId,
+								@PathVariable("page") Integer page) {
+		List<ZmMsg> list = msgDao.listByStoreIdAndTableIdAndMsgId(storeId, tableId, msgId, page);
 		return ApiResponse.success(list);
 	}
 
+	@RequestMapping(value = "h5/msg/add")
+	@ResponseBody
+	public ApiResponse msgAdd(@RequestParam(value = "storeId", required = true) String storeId,
+									 @RequestParam(value = "tableId", required = true) String tableId,
+							  @RequestParam(value = "userId", required = true) String userId,
+									 @RequestParam(value = "msgId") String msgId,
+							  @RequestParam(value = "detail") String detail,
+							  @RequestParam(value = "pic1") String pic1,
+							  @RequestParam(value = "pic2") String pic2,
+							  @RequestParam(value = "pic3") String pic3) {
+		msgDao.msgAdd(storeId, tableId, userId,  msgId, detail, pic1, pic2, pic3);
+		return ApiResponse.success();
+	}
 
-	
+	@RequestMapping(value = "h5/user/update")
+	@ResponseBody
+	public ApiResponse msgAdd(@RequestParam(value = "userId", required = true) String userId,
+							  @RequestParam(value = "name") String name,
+							  @RequestParam(value = "sex") String sex,
+							  @RequestParam(value = "area") String area,
+							  @RequestParam(value = "phone") String phone) {
+		if (StringUtil.isBlank(userId)){
+			return  ApiResponse.fail("999000","id can not be null");
+		}
+		ZmUser zmUser =  new ZmUser();
+		zmUser.setId(userId);
+		zmUser.setName(name);
+		zmUser.setSex(sex);
+		zmUser.setArea(area);
+		zmUser.setPhone(phone);
+		msgDao.updateZmUser(zmUser);
+		return ApiResponse.success();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@RequestMapping(value = "h5/h5index")
 	public ModelAndView h5index() {
 		WechatParam wp = wechatDao.getWechat(Context.WX_APPID);

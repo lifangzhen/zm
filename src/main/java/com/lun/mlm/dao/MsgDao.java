@@ -14,8 +14,12 @@ import java.util.List;
 public interface MsgDao {
     List<ZmBanner> listByStoreId(String storeId);
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
+    List<ZmMsg> listByStoreIdAndTableIdAndMsgId(String storeId, String tableId, String msgId, Integer page);
     ZmUser getUserByOpenId(String openId);
     void addZmUser(ZmUser zmUser);
     void addZmFriend(ZmFriend zmFriend);
     ZmFriend getZmFriend(String userId, String friendUserId);
+    void msgAdd(String storeId, String tableId, String userId,  String msgId, String detail, String pic1, String pic2, String pic3);
+
+    void updateZmUser(ZmUser zmUser);
 }
