@@ -97,7 +97,9 @@
 		detail,
 		pic1,
 		pic2,
-		pic3
+		pic3,
+		create_at,
+		update_at
 		)values(
 		#id#,
 		#msg_id#,
@@ -107,7 +109,9 @@
 		#detail#,
 		#pic1#,
 		#pic2#,
-		#pic3#
+		#pic3#,
+		NOW(),
+		NOW()
 		)
 	</insert>
 

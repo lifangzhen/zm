@@ -1,5 +1,6 @@
 package com.lun.mlm.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lun.mlm.dao.MsgDao;
 import com.lun.mlm.model.*;
 import com.lun.mlm.utils.ApiResponse;
+import com.lun.mlm.utils.FTPUtils;
 import com.lun.mlm.utils.IDGenerator;
 import com.townmc.mp.model.MpUser;
 import com.townmc.mp.model.Token;
@@ -204,11 +206,11 @@ public class WxSailController extends BaseController  {
 
 	@RequestMapping(value = "h5/user/update")
 	@ResponseBody
-	public ApiResponse msgAdd(@RequestParam(value = "userId", required = true) String userId,
-							  @RequestParam(value = "name") String name,
-							  @RequestParam(value = "sex") String sex,
-							  @RequestParam(value = "area") String area,
-							  @RequestParam(value = "phone") String phone) {
+	public ApiResponse userUpdate(@RequestParam(value = "userId", required = true) String userId,
+							  @RequestParam(value = "name", required = false) String name,
+							  @RequestParam(value = "sex", required = false) String sex,
+							  @RequestParam(value = "area", required = false) String area,
+							  @RequestParam(value = "phone", required = false) String phone) {
 		if (StringUtil.isBlank(userId)){
 			return  ApiResponse.fail("999000","id can not be null");
 		}
@@ -227,6 +229,23 @@ public class WxSailController extends BaseController  {
 	public ApiResponse userInfo(@RequestParam(value = "userId", required = true) String userId) {
 		ZmUser zmUser = msgDao.getUserById(userId);
 		return ApiResponse.success(zmUser);
+	}
+
+	@RequestMapping(value = "h5/up")
+	public ModelAndView up() {
+		ModelAndView mav = new ModelAndView("wx/upload");
+		return mav;
+	}
+
+	@RequestMapping(value = "h5/upload")
+	@ResponseBody
+	public ApiResponse upload(@RequestParam(value = "file", required = true) File file) throws Exception {
+		FTPUtils t = new FTPUtils("39.105.95.181", 21, "vsftpd", "vsftpd");
+		boolean isDirectory = t.makeDirectory("/var/www/html/");
+		System.out.println("创建目录是否成功： ======================" + isDirectory);
+		t.connect("/var/www/html");
+		t.upload(file);
+		return ApiResponse.success();
 	}
 
 
