@@ -35,7 +35,7 @@
       }
   </script>
 
-  <link href="/index.c5f467ee.css" rel="stylesheet"></head>
+  <link href="/index.9ae90d0a.css" rel="stylesheet"></head>
 <body>
 <input id="uid" value="${uid}" style="display:none;"/>
 <input id="storeId" value="${storeId}" style="display:none;"/>
@@ -55,7 +55,7 @@
             success: function(data) {
                 if(data.errorCode==0){
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: data.data.appId, // 必填，公众号的唯一标识
                         timestamp: data.data.timestamp, // 必填，生成签名的时间戳
                         nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
@@ -101,8 +101,10 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.b3393fcdfa695d54e2de.js"></script><script type="text/javascript" src="/index.0e8b2a91.js"></script></body>
+<script type="text/javascript" src="/common.926bd30dc817d229c140.js"></script><script type="text/javascript" src="/index.56f2c69c.js"></script></body>
 </html>
+
+
 
 
 
