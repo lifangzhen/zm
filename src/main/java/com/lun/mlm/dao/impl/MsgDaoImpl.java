@@ -54,6 +54,14 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
     }
 
     @Override
+    public void delZmFriend(String userId, String friendUserId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", userId);
+        map.put("friendUserId", friendUserId);
+        this.getSqlMapClientTemplate().delete("Msg_SqlMap.delFriend", map);
+    }
+
+    @Override
     public ZmUser getUserByOpenId(String openId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("openId", openId);

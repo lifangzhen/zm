@@ -97,6 +97,12 @@
 		</isNotEmpty>
 	</select>
 
+	<delete id="delFriend" parameterClass="java.util.HashMap">
+		delete from zm_friend
+		where user_id = #userId#
+		and friend_user_id = #friendUserId#
+	</delete>
+
 	<insert id="msgAdd" parameterClass="zmMsg">
 		INSERT INTO zm_msg (
 		id,
