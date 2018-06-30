@@ -1,9 +1,6 @@
 package com.lun.mlm.dao;
 
-import com.lun.mlm.model.ZmBanner;
-import com.lun.mlm.model.ZmFriend;
-import com.lun.mlm.model.ZmMsg;
-import com.lun.mlm.model.ZmUser;
+import com.lun.mlm.model.*;
 
 import java.util.List;
 
@@ -21,6 +18,10 @@ public interface MsgDao {
     void addZmFriend(ZmFriend zmFriend);
     ZmFriend getZmFriend(String userId, String friendUserId);
     void msgAdd(String storeId, String tableId, String userId,  String msgId, String detail, String pic1, String pic2, String pic3);
-
     void updateZmUser(ZmUser zmUser);
+    void comment(String msgId);
+    void share(String msgId);
+    void praize(String msgId);
+    void addMsgPraize(ZmMsgPraize zmMsgPraize);
+    Integer countMsgPraize(ZmMsgPraize zmMsgPraize);
 }

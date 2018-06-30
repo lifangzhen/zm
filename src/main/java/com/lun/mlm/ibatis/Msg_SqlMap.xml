@@ -8,6 +8,7 @@
 	<typeAlias alias="zmBanner" type="com.lun.mlm.model.ZmBanner"/>
 	<typeAlias alias="zmUser" type="com.lun.mlm.model.ZmUser"/>
 	<typeAlias alias="zmFriend" type="com.lun.mlm.model.ZmFriend"/>
+	<typeAlias alias="zmMsgPraize" type="com.lun.mlm.model.ZmMsgPraize"/>
 
 	<select id="getFriend" resultClass="zmFriend">
 		SELECT * FROM zm_friend m
@@ -135,5 +136,48 @@
 		t.update_at = NOW()
 		WHERE t.id = #id#
 	</update>
+
+	<update id="share" parameterClass="java.lang.String" >
+		UPDATE zm_msg t
+		SET t.share_count = t.share_count+1
+		t.update_at = NOW()
+		WHERE t.id = #id#
+	</update>
+
+	<update id="praize" parameterClass="java.lang.String" >
+		UPDATE zm_msg t
+		SET t.praize_count = t.praize_count+1
+		t.update_at = NOW()
+		WHERE t.id = #id#
+	</update>
+
+	<update id="comment" parameterClass="java.lang.String" >
+		UPDATE zm_msg t
+		SET t.comment_count = t.comment_count+1
+		t.update_at = NOW()
+		WHERE t.id = #id#
+	</update>
+
+	<insert id="msgPraizeAdd" parameterClass="zmMsgPraize">
+		INSERT INTO zm_msg_praize (
+		id,
+		msg_id,
+		user_id,
+		create_at,
+		update_at
+		)values(
+		#id#,
+		#msg_id#,
+		#user_id#,
+		NOW(),
+		NOW()
+		)
+	</insert>
+
+	<select id="countPraizeByUserId" parameterClass="zmMsgPraize" resultClass="java.lang.Integer">
+		SELECT count(1) FROM zm_msg_praize m
+		WHERE m.user_id = #user_id#
+		and m.msg_id = #msg_id#
+	</select>
     
 </sqlMap>

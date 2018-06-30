@@ -1,11 +1,9 @@
 package com.lun.mlm.dao.impl;
 
 import com.lun.mlm.dao.MsgDao;
-import com.lun.mlm.model.ZmBanner;
-import com.lun.mlm.model.ZmFriend;
-import com.lun.mlm.model.ZmMsg;
-import com.lun.mlm.model.ZmUser;
+import com.lun.mlm.model.*;
 import com.lun.mlm.utils.IDGenerator;
+import com.lun.mlm.utils.StringUtil;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -91,10 +89,38 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         zmMsg.setPic2(pic2);
         zmMsg.setPic3(pic3);
         this.getSqlMapClientTemplate().insert("Msg_SqlMap.msgAdd", zmMsg);
+        if (StringUtil.isNotBlank(msgId)){
+            this.getSqlMapClientTemplate().update("Msg_SqlMap.comment", msgId);
+        }
     }
 
     @Override
     public void updateZmUser(ZmUser zmUser) {
         this.getSqlMapClientTemplate().update("Msg_SqlMap.updateZmUser", zmUser);
+    }
+
+    @Override
+    public void comment(String msgId) {
+        this.getSqlMapClientTemplate().update("Msg_SqlMap.comment", msgId);
+    }
+
+    @Override
+    public void share(String msgId) {
+        this.getSqlMapClientTemplate().update("Msg_SqlMap.share", msgId);
+    }
+
+    @Override
+    public void praize(String msgId) {
+        this.getSqlMapClientTemplate().update("Msg_SqlMap.praize", msgId);
+    }
+
+    @Override
+    public void addMsgPraize(ZmMsgPraize zmMsgPraize) {
+        this.getSqlMapClientTemplate().insert("Msg_SqlMap.msgPraizeAdd", zmMsgPraize);
+    }
+
+    @Override
+    public Integer countMsgPraize(ZmMsgPraize zmMsgPraize) {
+        return (Integer) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.countPraizeByUserId",zmMsgPraize);
     }
 }

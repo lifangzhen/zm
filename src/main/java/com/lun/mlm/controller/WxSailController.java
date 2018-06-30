@@ -204,6 +204,22 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success();
 	}
 
+	@RequestMapping(value = "h5/msg/praize")
+	@ResponseBody
+	public ApiResponse praize(@RequestParam(value = "userId", required = true) String userId,
+							  @RequestParam(value = "msgId") String msgId) {
+		ZmMsgPraize zmMsgPraize = new ZmMsgPraize();
+		zmMsgPraize.setId(IDGenerator.nextId());
+		zmMsgPraize.setMsg_id(msgId);
+		zmMsgPraize.setUser_id(userId);
+		if (msgDao.countMsgPraize(zmMsgPraize)>0){
+			return ApiResponse.fail("01","该评论已经点过赞了");
+		}
+		msgDao.addMsgPraize(zmMsgPraize);
+		msgDao.praize(msgId);
+		return ApiResponse.success();
+	}
+
 	@RequestMapping(value = "h5/user/update")
 	@ResponseBody
 	public ApiResponse userUpdate(@RequestParam(value = "userId", required = true) String userId,
