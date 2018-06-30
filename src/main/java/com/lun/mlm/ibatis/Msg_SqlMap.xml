@@ -139,21 +139,21 @@
 
 	<update id="share" parameterClass="java.lang.String" >
 		UPDATE zm_msg t
-		SET t.share_count = t.share_count+1
+		SET t.share_count = t.share_count+1,
 		t.update_at = NOW()
 		WHERE t.id = #id#
 	</update>
 
 	<update id="praize" parameterClass="java.lang.String" >
 		UPDATE zm_msg t
-		SET t.praize_count = t.praize_count+1
+		SET t.praize_count = t.praize_count+1,
 		t.update_at = NOW()
 		WHERE t.id = #id#
 	</update>
 
 	<update id="comment" parameterClass="java.lang.String" >
 		UPDATE zm_msg t
-		SET t.comment_count = t.comment_count+1
+		SET t.comment_count = t.comment_count+1,
 		t.update_at = NOW()
 		WHERE t.id = #id#
 	</update>
