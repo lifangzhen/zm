@@ -264,6 +264,14 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success();
 	}
 
+	@RequestMapping(value = "h5/myFriend/{userId}/{page}")
+	@ResponseBody
+	public ApiResponse tablemsg(@PathVariable("userId") String userId,
+								@PathVariable("page") Integer page) {
+		List<ZmFriend> list = msgDao.listZmFriend(userId, page);
+		return ApiResponse.success(list);
+	}
+
 
 
 

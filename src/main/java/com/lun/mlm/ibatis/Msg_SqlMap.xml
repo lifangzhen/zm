@@ -88,6 +88,15 @@
 		</isNotEmpty>
     </select>
 
+	<select id="listFriend"  resultClass="zmFriend">
+		SELECT * FROM zm_friend m
+		WHERE m.user_id = #userId#
+		ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+	</select>
+
 	<insert id="msgAdd" parameterClass="zmMsg">
 		INSERT INTO zm_msg (
 		id,
