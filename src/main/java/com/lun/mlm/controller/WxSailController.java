@@ -191,7 +191,7 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success(list);
 	}
 
-	@RequestMapping(value = "h5/msg/add")
+	@RequestMapping(value = "h5/msg/add", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResponse msgAdd(@RequestParam(value = "storeId", required = true) String storeId,
 									 @RequestParam(value = "tableId", required = true) String tableId,
