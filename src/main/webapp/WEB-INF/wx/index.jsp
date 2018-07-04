@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" data-scale="true">
 <head>
@@ -35,7 +34,7 @@
       }
   </script>
 
-  <link href="/index.ffe16e90.css" rel="stylesheet"></head>
+  <link href="/dva-antd-mobile-starter/index.ffe16e90.css" rel="stylesheet"></head>
 <body>
 <input id="uid" value="${uid}" style="display:none;"/>
 <input id="storeId" value="${storeId}" style="display:none;"/>
@@ -101,8 +100,10 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.a539091ecd5711da55a7.js"></script><script type="text/javascript" src="/index.c8604df8.js"></script></body>
+<script type="text/javascript" src="/dva-antd-mobile-starter/common.a969fbd5f7160bfd012e.js"></script><script type="text/javascript" src="/dva-antd-mobile-starter/index.c8604df8.js"></script></body>
 </html>
+
+
 
 
 
