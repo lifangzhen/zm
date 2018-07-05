@@ -1,6 +1,7 @@
 package com.lun.mlm.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.lun.mlm.utils.FTPUtils;
 import com.lun.mlm.utils.IDGenerator;
 import com.townmc.mp.model.MpUser;
 import com.townmc.mp.model.Token;
+import org.apache.commons.net.ftp.FTPClient;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -196,11 +198,11 @@ public class WxSailController extends BaseController  {
 	public ApiResponse msgAdd(@RequestParam(value = "storeId", required = true) String storeId,
 									 @RequestParam(value = "tableId", required = true) String tableId,
 							  @RequestParam(value = "userId", required = true) String userId,
-									 @RequestParam(value = "msgId") String msgId,
-							  @RequestParam(value = "detail") String detail,
-							  @RequestParam(value = "pic1") String pic1,
-							  @RequestParam(value = "pic2") String pic2,
-							  @RequestParam(value = "pic3") String pic3) {
+									 @RequestParam(value = "msgId", required = false) String msgId,
+							  @RequestParam(value = "detail", required = true) String detail,
+							  @RequestParam(value = "pic1",required = false) String pic1,
+							  @RequestParam(value = "pic2",required = false) String pic2,
+							  @RequestParam(value = "pic3",required = false) String pic3) {
 		msgDao.msgAdd(storeId, tableId, userId,  msgId, detail, pic1, pic2, pic3);
 		return ApiResponse.success();
 	}
@@ -254,7 +256,7 @@ public class WxSailController extends BaseController  {
 		return mav;
 	}
 
-	@RequestMapping(value = "h5/upload")
+	@RequestMapping(value = "h5/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResponse upload(@RequestParam(value = "file", required = true) File file) throws Exception {
 		FTPUtils t = new FTPUtils("39.105.95.181", 21, "vsftpd", "vsftpd");
