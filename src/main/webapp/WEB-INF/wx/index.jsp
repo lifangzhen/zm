@@ -35,7 +35,7 @@
       }
   </script>
 
-  <link href="/index.b1e9f111.css" rel="stylesheet"></head>
+  <link href="/index.39789c1c.css" rel="stylesheet"></head>
 <body>
 <input id="uid" name="uid" value="${uid}">
 <input id="storeId" name="storeId" value="${storeId}">
@@ -101,7 +101,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.157c780f06d9a6869c44.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
+<script type="text/javascript" src="/common.59b1b94f15bb98064511.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
 </html>
 
 
