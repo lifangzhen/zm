@@ -35,13 +35,12 @@
       }
   </script>
 
-  <link href="/index.ffe16e90.css" rel="stylesheet"></head>
+  <link href="/index.b1e9f111.css" rel="stylesheet"></head>
 <body>
-<div id="root">
-  <input id="uid" name="uid" value="${uid}">
-  <input id="storeId" name="storeId" value="${storeId}">
-  <input id="tableId" name="tableId" value="${tableId}">
-</div>
+<input id="uid" name="uid" value="${uid}">
+<input id="storeId" name="storeId" value="${storeId}">
+<input id="tableId" name="tableId" value="${tableId}">
+<div id="root"></div>
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     $(function(){
@@ -56,7 +55,7 @@
             success: function(data) {
                 if(data.errorCode==0){
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: data.data.appId, // 必填，公众号的唯一标识
                         timestamp: data.data.timestamp, // 必填，生成签名的时间戳
                         nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
@@ -102,11 +101,8 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.c68790937d6e37a8b1cb.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
+<script type="text/javascript" src="/common.157c780f06d9a6869c44.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
 </html>
-
-
-
 
 
 
