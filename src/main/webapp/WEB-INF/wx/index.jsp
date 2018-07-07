@@ -37,10 +37,11 @@
 
   <link href="/index.ffe16e90.css" rel="stylesheet"></head>
 <body>
-<input id="uid" value="152957083781018284" style="display:none;"/>
-<input id="storeId" value="001" style="display:none;"/>
-<input id="tableId" value="001" style="display:none;"/>
-<div id="root"></div>
+<div id="root">
+  <input id="uid" value="152957083781018284" style="display:none;"/>
+  <input id="storeId" value="001" style="display:none;"/>
+  <input id="tableId" value="001" style="display:none;"/>
+</div>
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     $(function(){
@@ -101,7 +102,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.804d9bf0468199648ff1.js"></script><script type="text/javascript" src="/index.c8604df8.js"></script></body>
+<script type="text/javascript" src="/common.c68790937d6e37a8b1cb.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
 </html>
 
 
