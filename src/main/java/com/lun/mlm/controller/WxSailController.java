@@ -246,6 +246,7 @@ public class WxSailController extends BaseController  {
 	@RequestMapping(value = "h5/user/info")
 	@ResponseBody
 	public ApiResponse userInfo(@RequestParam(value = "userId", required = true) String userId) {
+		System.out.println("this is userInfo++++userId:"+userId);
 		ZmUser zmUser = msgDao.getUserById(userId);
 		return ApiResponse.success(zmUser);
 	}
