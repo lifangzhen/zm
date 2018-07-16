@@ -74,7 +74,10 @@
 	</select>
     
     <select id="list"  resultClass="zmMsg">
-    	SELECT * FROM zm_msg m
+    	SELECT m.*,
+		(select u.`name` FROM zm_user u where u.id = m.user_id) as `name` ,
+		(select u.`head_img` FROM zm_user u where u.id = m.user_id) as `head_img`
+		FROM zm_msg m
 		WHERE m.store_id = #storeId#
 		<isNotEmpty property="tableId">
 			AND m.table_id = #tableId#

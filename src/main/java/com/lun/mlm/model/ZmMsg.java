@@ -8,6 +8,8 @@ public class ZmMsg {
     private String id;
     private String msg_id;
     private String user_id;
+    private String name;
+    private String head_img;
     private String store_id;
     private String table_id;
     private String detail;
@@ -41,6 +43,22 @@ public class ZmMsg {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getHead_img() {
+        return head_img;
+    }
+
+    public void setHead_img(String head_img) {
+        this.head_img = head_img;
     }
 
     public String getStore_id() {
