@@ -10,6 +10,8 @@ public class ZmFriend {
     private String id;
     private String user_id;
     private String friend_user_id;
+    private String name;
+    private String head_img;
     private Date create_at;
     private Date update_at;
     private Integer status;
@@ -36,6 +38,14 @@ public class ZmFriend {
 
     public void setFriend_user_id(String friend_user_id) {
         this.friend_user_id = friend_user_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreate_at() {
