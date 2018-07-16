@@ -128,7 +128,6 @@ public class LoginController extends MlmController {
 	
 	/**
 	 * 更新系统参数
-	 * @param request
 	 * @return
 	 * @throws IOException
 	 */

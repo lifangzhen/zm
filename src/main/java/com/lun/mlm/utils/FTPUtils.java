@@ -2,10 +2,13 @@ package com.lun.mlm.utils;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.commons.net.ftp.FTPSClient;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class FTPUtils {
 
@@ -38,7 +41,17 @@ public class FTPUtils {
         return ftp.makeDirectory(path);
     }
 
-
+    public String upload(MultipartFile multipartFile) throws IOException {
+        String fileName = multipartFile.getOriginalFilename();
+        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
+        FileInputStream input = (FileInputStream) multipartFile.getInputStream();
+        String newFileName = IDGenerator.nextId()+"."+prefix;
+        ftp.setControlEncoding("UTF-8");
+        ftp.enterLocalPassiveMode();
+        boolean result = ftp.storeFile(new String(newFileName.getBytes("UTF-8"),"iso-8859-1"), input);
+        input.close();
+        return newFileName;
+    }
 
     /**
      *
@@ -65,11 +78,9 @@ public class FTPUtils {
         }else{
             File file2 = new File(file.getPath());
             FileInputStream input = new FileInputStream(file2);
-            System.out.println("fileName:"+file.getName());
             ftp.setControlEncoding("UTF-8");
             ftp.enterLocalPassiveMode();
             boolean result = ftp.storeFile(new String(file.getName().getBytes("UTF-8"),"iso-8859-1"), input);
-            System.out.println(result);
             input.close();
         }
     }
@@ -83,12 +94,27 @@ public class FTPUtils {
     }
 
 
-    public static void main(String[] args) throws Exception{
-        FTPUtils t = new FTPUtils("39.105.95.181", 21, "vsftpd", "vsftpd");
-        boolean isDirectory = t.makeDirectory("/var/www/html/");
-        System.out.println("创建目录是否成功： ======================" + isDirectory);
-        t.connect("/var/www/html");
-        File file = new File("D:\\desk.png");
-        t.upload(file);
+        public static void main(String[] args) throws Exception{
+            FTPUtils t = new FTPUtils("39.105.95.181", 21, "ftptest", "ftptest");
+            boolean isDirectory = t.makeDirectory("/var/www/html");
+            System.out.println("创建目录是否成功： ======================" + isDirectory);
+            t.connect("/var/www/html/");
+            File file = new File("D:\\desk.png");
+            t.upload(file);
+
+//            FTPClient ftpClient = new FTPClient();
+//            ftpClient.connect("39.105.95.181",21);
+//            Boolean login = ftpClient.login("ftptest","ftptest");
+//            System.out.println("登录："+login);
+//
+//            ftpClient.enterLocalPassiveMode();
+//
+//            File file = new File("D://desk.png");
+//            FileInputStream inputStream = new FileInputStream(file);
+//
+//            Boolean store = ftpClient.storeFile("/var/www/html/desk.png", inputStream);
+//            System.out.println("存储:"+store);
+
+
     }
 }

@@ -29,6 +29,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lun.mlm.MlmException;
@@ -259,13 +260,14 @@ public class WxSailController extends BaseController  {
 
 	@RequestMapping(value = "h5/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResponse upload(@RequestParam(value = "file", required = true) File file) throws Exception {
-		FTPUtils t = new FTPUtils("39.105.95.181", 21, "vsftpd", "vsftpd");
-		boolean isDirectory = t.makeDirectory("/var/www/html/");
+	public ApiResponse upload(@RequestParam(value = "file", required = true) MultipartFile file) throws Exception {
+		FTPUtils t = new FTPUtils("39.105.95.181", 21, "ftptest", "ftptest");
+		boolean isDirectory = t.makeDirectory("/var/www/html");
 		System.out.println("创建目录是否成功： ======================" + isDirectory);
-		t.connect("/var/www/html");
-		t.upload(file);
-		return ApiResponse.success();
+		t.connect("/var/www/html/");
+		String picName = t.upload(file);
+		String picUrl = "http://test.herison.com.cn/"+picName;
+		return ApiResponse.success(picUrl);
 	}
 
 	@RequestMapping(value = "h5/myFriend/{userId}/{page}")
