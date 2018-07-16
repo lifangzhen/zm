@@ -101,5 +101,5 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.call('hideOptionMenu');
 });
 </script>  -->
-<script type="text/javascript" src="/common.e2bb727b530c4d7648b6.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
+<script type="text/javascript" src="/common.c5ff4bff39891c41737e.js"></script><script type="text/javascript" src="/index.03bb21be.js"></script></body>
 </html>
