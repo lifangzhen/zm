@@ -48,7 +48,6 @@ public class FTPUtils {
         String newFileName = IDGenerator.nextId()+"."+prefix;
         ftp.setControlEncoding("UTF-8");
         ftp.enterLocalPassiveMode();
-        ftp.enterRemotePassiveMode();
         boolean result = ftp.storeFile(new String(newFileName.getBytes("UTF-8"),"iso-8859-1"), input);
         System.out.println("上传结果为:"+result);
         input.close();
