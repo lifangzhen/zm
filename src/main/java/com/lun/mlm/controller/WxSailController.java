@@ -262,7 +262,7 @@ public class WxSailController extends BaseController  {
 	@ResponseBody
 	public ApiResponse upload(@RequestParam(value = "file", required = true) MultipartFile file) throws Exception {
 		System.out.println("originName:"+file.getOriginalFilename()+" size:"+file.getSize());
-		FTPUtils t = new FTPUtils("39.105.95.181", 21, "ftptest", "ftptest");
+		FTPUtils t = new FTPUtils("127.0.0.1", 21, "ftptest", "ftptest");
 		boolean isDirectory = t.makeDirectory("/var/www/html");
 		System.out.println("创建目录是否成功： ======================" + isDirectory);
 		t.connect("/var/www/html/");
