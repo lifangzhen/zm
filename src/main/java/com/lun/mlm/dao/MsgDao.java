@@ -12,6 +12,8 @@ public interface MsgDao {
     List<ZmBanner> listByStoreId(String storeId);
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
     List<ZmMsg> listByStoreIdAndTableIdAndMsgId(String storeId, String tableId, String msgId, Integer page);
+    List<ZmMsg> listMyMsgs(String userId, Integer page);
+    List<ZmMsg> listMyReplyMsgs(String userId, Integer page);
     List<ZmFriend> listZmFriend(String userId, Integer page);
     void delZmFriend(String userId, String friendUserId);
     ZmUser getUserByOpenId(String openId);

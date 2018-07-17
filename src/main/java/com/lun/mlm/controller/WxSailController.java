@@ -194,6 +194,22 @@ public class WxSailController extends BaseController  {
 		return ApiResponse.success(list);
 	}
 
+	@RequestMapping(value = "h5/myMsg/{userId}/{page}")
+	@ResponseBody
+	public ApiResponse myMsg(@PathVariable("userId") String userId,
+									 @PathVariable("page") Integer page) {
+		List<ZmMsg> list = msgDao.listMyMsgs(userId, page);
+		return ApiResponse.success(list);
+	}
+
+	@RequestMapping(value = "h5/myReplyMsg/{userId}/{page}")
+	@ResponseBody
+	public ApiResponse myReplyMsg(@PathVariable("userId") String userId,
+							 @PathVariable("page") Integer page) {
+		List<ZmMsg> list = msgDao.listMyReplyMsgs(userId, page);
+		return ApiResponse.success(list);
+	}
+
 	@RequestMapping(value = "h5/msg/add", method = RequestMethod.POST)
 	@ResponseBody
 	public ApiResponse msgAdd(@RequestParam(value = "storeId", required = true) String storeId,

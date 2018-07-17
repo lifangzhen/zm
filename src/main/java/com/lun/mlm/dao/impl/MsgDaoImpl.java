@@ -17,7 +17,6 @@ import java.util.Map;
  */
 @Repository("msgDao")
 public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
-    @Override
     public List<ZmBanner> listByStoreId(String storeId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("storeId", storeId);
@@ -33,7 +32,6 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.list", map);
     }
 
-    @Override
     public List<ZmMsg> listByStoreIdAndTableIdAndMsgId(String storeId, String tableId, String msgId, Integer page) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("storeId", storeId);
@@ -44,7 +42,22 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.list", map);
     }
 
-    @Override
+    public List<ZmMsg> listMyMsgs(String userId, Integer page) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", userId);
+        map.put("start", (page-1)*10);
+        map.put("end", page*10);
+        return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listMyMsgs", map);
+    }
+
+    public List<ZmMsg> listMyReplyMsgs(String userId, Integer page) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", userId);
+        map.put("start", (page-1)*10);
+        map.put("end", page*10);
+        return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listMyReplyMsgs", map);
+    }
+
     public List<ZmFriend> listZmFriend(String userId, Integer page) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userId", userId);
@@ -53,7 +66,6 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listFriend", map);
     }
 
-    @Override
     public void delZmFriend(String userId, String friendUserId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userId", userId);
@@ -61,31 +73,26 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         this.getSqlMapClientTemplate().delete("Msg_SqlMap.delFriend", map);
     }
 
-    @Override
     public ZmUser getUserByOpenId(String openId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("openId", openId);
         return (ZmUser) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.getUserByOpenId", map);
     }
 
-    @Override
     public ZmUser getUserById(String id) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("id", id);
         return (ZmUser) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.getUserById", map);
     }
 
-    @Override
     public void addZmUser(ZmUser zmUser) {
         this.getSqlMapClientTemplate().insert("Msg_SqlMap.addZmUser", zmUser);
     }
 
-    @Override
     public void addZmFriend(ZmFriend zmFriend) {
         this.getSqlMapClientTemplate().insert("Msg_SqlMap.addZmFriend", zmFriend);
     }
 
-    @Override
     public ZmFriend getZmFriend(String userId, String friendUserId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userId", userId);
@@ -93,7 +100,6 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         return (ZmFriend) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.getFriend", map);
     }
 
-    @Override
     public void msgAdd(String storeId, String tableId, String userId, String msgId, String detail, String pic1, String pic2, String pic3) {
         ZmMsg zmMsg = new ZmMsg();
         zmMsg.setId(IDGenerator.nextId());
@@ -111,32 +117,26 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         }
     }
 
-    @Override
     public void updateZmUser(ZmUser zmUser) {
         this.getSqlMapClientTemplate().update("Msg_SqlMap.updateZmUser", zmUser);
     }
 
-    @Override
     public void comment(String msgId) {
         this.getSqlMapClientTemplate().update("Msg_SqlMap.comment", msgId);
     }
 
-    @Override
     public void share(String msgId) {
         this.getSqlMapClientTemplate().update("Msg_SqlMap.share", msgId);
     }
 
-    @Override
     public void praize(String msgId) {
         this.getSqlMapClientTemplate().update("Msg_SqlMap.praize", msgId);
     }
 
-    @Override
     public void addMsgPraize(ZmMsgPraize zmMsgPraize) {
         this.getSqlMapClientTemplate().insert("Msg_SqlMap.msgPraizeAdd", zmMsgPraize);
     }
 
-    @Override
     public Integer countMsgPraize(ZmMsgPraize zmMsgPraize) {
         return (Integer) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.countPraizeByUserId",zmMsgPraize);
     }

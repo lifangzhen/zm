@@ -91,6 +91,28 @@
 		</isNotEmpty>
     </select>
 
+	<select id="listMyMsgs"  resultClass="zmMsg">
+		SELECT m.*
+		FROM zm_msg m
+		WHERE m.user_id = #userId#
+		AND m.msg_id is null
+		ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+	</select>
+
+	<select id="listMyReplyMsgs"  resultClass="zmMsg">
+		SELECT m.*
+		FROM zm_msg m
+		WHERE m.user_id = #userId#
+		AND m.msg_id is not null
+		ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+	</select>
+
 	<select id="listFriend"  resultClass="zmFriend">
 		SELECT m.*,
 		(select u.`name` FROM zm_user u where u.id = m.friend_user_id) as `name` ,
