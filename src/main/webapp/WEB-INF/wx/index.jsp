@@ -37,9 +37,9 @@
 
   <link href="/index.39789c1c.css" rel="stylesheet"></head>
 <body>
-<div id="uid" value="152938576536913814" style="display:none;"></div>
-<div id="storeId" value="001" style="display:none;"></div>
-<div id="tableId" value="001" style="display:none;"></div>
+<div id="uid" value="${uid}" style="display:none;"></div>
+<div id="storeId" value="${storeId}" style="display:none;"></div>
+<div id="tableId" value="${tableId}" style="display:none;"></div>
 <div id="root"></div>
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
