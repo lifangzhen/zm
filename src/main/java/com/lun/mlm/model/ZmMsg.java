@@ -1,5 +1,7 @@
 package com.lun.mlm.model;
 
+import java.util.Date;
+
 /**
  * User:policy
  * Date:2018/5/28 0:34
@@ -20,6 +22,7 @@ public class ZmMsg {
     private Integer comment_count;
     private Integer praize_count;
     private Integer status;
+    private Date create_at;
 
     public String getId() {
         return id;
@@ -139,5 +142,13 @@ public class ZmMsg {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(Date create_at) {
+        this.create_at = create_at;
     }
 }
