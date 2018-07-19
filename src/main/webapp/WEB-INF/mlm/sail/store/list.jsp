@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/page/inc/taglib.jsp"%>
 <div class="pageHeader">
-	<form id="pagerForm" onsubmit="return navTabSearch(this);" action="/mlm/categoryUi" method="post">
+	<form id="pagerForm" onsubmit="return navTabSearch(this);" action="/mlm/storeUi" method="post">
 	<%@include file="/page/inc/pageForm.jsp"%>
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					类别名称：<input type="text" name="name" value="${name}" alt="模糊查找" size="30" />
+					门店名称：<input type="text" name="name" value="${name}" alt="模糊查找" size="30" />
 				</td>
 				<td colspan="4">
 					<div class="subBar">
@@ -25,15 +25,14 @@
 
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="/mlm/addCategoryUi" target="dialog" rel="input" title="新增类别"><span>新增类别</span></a></li>
+			<li><a class="add" href="/mlm/addStoreUi" target="dialog" rel="input" title="新增门店"><span>新增门店</span></a></li>
 		</ul>
 	</div>
 	
 	<table class="table" targetType="navTab" asc="asc" desc="desc" width="100%" layoutH="160">
 		<thead>
 			<tr>
-				<th>类别</th>
-				<th>排序</th>
+				<th>名称</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -41,10 +40,8 @@
 			<c:forEach var="c" items="${list}">
 				<tr target="sid_user" rel="${c.id}">
 					<td>${c.name}</td>
-				    <td>${c.number}</td>
 					<td>
-							&nbsp;[<a href="/mlm/addCategoryUi?id=${c.id}" title="修改"  callback="dialogAjax" target="dialog" rel="input" style="color:blue" >修改</a>]&nbsp;&nbsp;
-			    	    	&nbsp;[<a href="/mlm/deleteCategory/json?id=${c.id}" target="ajaxTodo"  rel="input" title="确定要删除${c.name }?" style="color:blue">删除</a>]
+			    	    	&nbsp;[<a href="/mlm/deleteStore/json?id=${c.id}" target="ajaxTodo"  rel="input" title="确定要删除${c.name }?" style="color:blue">删除</a>]
 					</td>
 				</tr>
 			</c:forEach>

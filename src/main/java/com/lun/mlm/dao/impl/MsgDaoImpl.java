@@ -7,6 +7,7 @@ import com.lun.mlm.utils.StringUtil;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import javax.mail.Store;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,39 @@ import java.util.Map;
  */
 @Repository("msgDao")
 public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
+    public List<ZmStore> listStore(String name, Integer start, Integer end) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", name);
+        map.put("start",start);
+        map.put("end",end);
+        return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listStores", map);
+    }
+
+    public List<ZmTable> listTable(String num, String storeId, Integer start, Integer end) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("num", num);
+        map.put("storeId", storeId);
+        map.put("start",start);
+        map.put("end",end);
+        return this.getSqlMapClientTemplate().queryForList("Msg_SqlMap.listTables", map);
+    }
+
+    public Integer countStore(String name) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", name);
+        return (Integer) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.countStore", map);
+    }
+
+    public void addStore(ZmStore zmStore) {
+        this.getSqlMapClientTemplate().insert("Msg_SqlMap.addStore", zmStore);
+    }
+
+    public void delStore(String storeId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("storeId", storeId);
+        this.getSqlMapClientTemplate().delete("Msg_SqlMap.delStore", map);
+    }
+
     public List<ZmBanner> listByStoreId(String storeId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("storeId", storeId);

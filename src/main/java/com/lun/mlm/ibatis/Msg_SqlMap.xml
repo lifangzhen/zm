@@ -9,6 +9,65 @@
 	<typeAlias alias="zmUser" type="com.lun.mlm.model.ZmUser"/>
 	<typeAlias alias="zmFriend" type="com.lun.mlm.model.ZmFriend"/>
 	<typeAlias alias="zmMsgPraize" type="com.lun.mlm.model.ZmMsgPraize"/>
+	<typeAlias alias="zmStore" type="com.lun.mlm.model.ZmStore"/>
+	<typeAlias alias="zmTable" type="com.lun.mlm.model.ZmTable"/>
+
+	<insert id="addStore" parameterClass="zmStore">
+		INSERT INTO zm_store (
+		id,
+		name,
+		create_at,
+		update_at
+		)
+		VALUES
+		(#id#,
+		#name#,
+		NOW(),
+		NOW()
+		)
+	</insert>
+
+	<delete id="delStore" parameterClass="java.util.HashMap">
+		delete from zm_store
+		where id = #storeId#
+	</delete>
+
+	<select id="listStores"  resultClass="zmStore">
+		SELECT m.*
+		FROM zm_store m
+		WHERE 1 = 1
+		<isNotEmpty property="name">
+			AND m.name = #name#
+		</isNotEmpty>
+		ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+	</select>
+
+	<select id="countStore" resultClass="java.lang.Integer">
+		SELECT count(1) FROM zm_store m
+		WHERE 1 = 1
+		<isNotEmpty property="name">
+			AND m.name = #name#
+		</isNotEmpty>
+	</select>
+
+	<select id="listTables"  resultClass="zmTable">
+		SELECT m.*
+		FROM zm_table m
+		WHERE 1 = 1
+		<isNotEmpty property="num">
+			AND m.num = #num#
+		</isNotEmpty>
+		<isNotEmpty property="storeId">
+			AND m.store_id = #storeId#
+		</isNotEmpty>
+		ORDER BY m.create_at DESC
+		<isNotEmpty property="start">
+			LIMIT #start#, #end#
+		</isNotEmpty>
+	</select>
 
 	<select id="getFriend" resultClass="zmFriend">
 		SELECT * FROM zm_friend m

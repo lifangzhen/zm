@@ -2,6 +2,7 @@ package com.lun.mlm.dao;
 
 import com.lun.mlm.model.*;
 
+import javax.mail.Store;
 import java.util.List;
 
 /**
@@ -9,6 +10,13 @@ import java.util.List;
  * Date:2018/6/12 19:54
  */
 public interface MsgDao {
+    List<ZmStore> listStore(String name, Integer start, Integer end);
+    List<ZmTable> listTable(String num, String storeId, Integer start, Integer end);
+    Integer countStore(String name);
+    void addStore(ZmStore zmStore);
+    void delStore(String storeId);
+    Integer countTable(String num, String storeId);
+
     List<ZmBanner> listByStoreId(String storeId);
     List<ZmMsg> listByStoreIdAndTableId(String storeId, String tableId, Integer page);
     List<ZmMsg> listByStoreIdAndTableIdAndMsgId(String storeId, String tableId, String msgId, Integer page);

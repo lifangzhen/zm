@@ -9,20 +9,16 @@
 -->
 </style>
 <div class="pageContent">
-	<form id="form" method="post" action="/mlm/addCategory/json" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+	<form id="form" method="post" action="/mlm/addStore/json" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent" layoutH="60">
 			<p style="width:99%">
 				<label></label>
-				<span style="color:red;">提示：排序值越小越靠前！</span>
+				<span style="color:red;"></span>
 			</p>
 			<input type="hidden"  name="id" value="${cate.id }"/>
 			<p style="width:99%">
-				<label>类别名称：</label>
+				<label>门店名称：</label>
 				<input type="text" name="name" class="required " value="${cate.name }" maxlength="8" size="30" />
-			</p>
-			<p style="width:99%">
-				<label>类别排序：</label>
-				<input name="numberStr" class="required digits" value="${cate.number }" minlength="1" maxlength="45" size="30" />
 			</p>
 		</div>
 		<div class="formBar">
