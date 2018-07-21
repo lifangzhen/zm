@@ -51,8 +51,8 @@
 			<c:forEach var="d" items="${list}">
 				<tr target="sid_user" rel="${d.id}">
 					<td>${d.num}</td>
-					<td>${d.storeId}</td>
-				    <td><img width="50"  src="${d.storeId}" /></td>
+					<td>${d.store_id}</td>
+				    <td><img width="50"  src="${d.store_id}" /></td>
 
 					<td>
 							&nbsp;[<a href="/mlm/deleteTable/json?id=${d.id}" target="ajaxTodo"  rel="input" title="确定要删除${d.num }?" style="color:blue">删除</a>]

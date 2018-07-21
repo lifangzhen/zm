@@ -51,6 +51,13 @@ public class MsgDaoImpl extends SqlMapClientDaoSupport implements MsgDao {
         this.getSqlMapClientTemplate().delete("Msg_SqlMap.delStore", map);
     }
 
+    public Integer countTable(String num, String storeId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("num", num);
+        map.put("storeId",storeId);
+        return (Integer) this.getSqlMapClientTemplate().queryForObject("Msg_SqlMap.countTables", map);
+    }
+
     public List<ZmBanner> listByStoreId(String storeId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("storeId", storeId);

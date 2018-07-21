@@ -88,16 +88,16 @@ public class SailController extends BaseController {
 		PageParam pp = this.getPageParam();
 		List<ZmTable> list = msgDao.listTable(num,storeId,pp.getStart(),pp.getEnd());
 		List<ZmStore> storeList = msgDao.listStore(null,null,null);
-//		Integer count  = msgDao.countDish(name, categoryId);
+		Integer count  = msgDao.countTable(num, storeId);
 		ModelAndView mav = new ModelAndView("/mlm/sail/table/list");
-//		mav.addObject("name", name);
-//		mav.addObject("categoryId", categoryId);
-//		mav.addObject("list", list);
-//		mav.addObject("cateList", cateList);
-//		mav.addObject("numPerPage",pp.getNumPerPage());
-//		mav.addObject("totalCount",count);
-//		mav.addObject("currentPage",pp.getPageNum());
-//		mav.addObject("pageCount",PageParam.pageCount(count, pp.getNumPerPage()));
+		mav.addObject("num", num);
+		mav.addObject("storeId", storeId);
+		mav.addObject("list", list);
+		mav.addObject("storeList", storeList);
+		mav.addObject("numPerPage",pp.getNumPerPage());
+		mav.addObject("totalCount",count);
+		mav.addObject("currentPage",pp.getPageNum());
+		mav.addObject("pageCount",PageParam.pageCount(count, pp.getNumPerPage()));
 		return mav;
 	}
 	
@@ -107,7 +107,7 @@ public class SailController extends BaseController {
 		Dish dish = new Dish();
 		if(StringUtil.isNotBlank(id)) dish = sailDao.getDish(id);
 		List<Category> cateList = sailDao.listCategory(null, null, null);
-		ModelAndView mav = new ModelAndView("/mlm/sail/dish/add");
+		ModelAndView mav = new ModelAndView("/mlm/sail/table/add");
 		mav.addObject("id", id);
 		mav.addObject("dish", dish);
 		mav.addObject("cateList", cateList);

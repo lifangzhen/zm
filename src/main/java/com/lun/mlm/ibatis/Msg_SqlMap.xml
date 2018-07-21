@@ -69,6 +69,17 @@
 		</isNotEmpty>
 	</select>
 
+	<select id="countTables" resultClass="java.lang.Integer">
+		SELECT count(1) FROM zm_table m
+		WHERE 1 = 1
+		<isNotEmpty property="num">
+			AND m.num = #num#
+		</isNotEmpty>
+		<isNotEmpty property="storeId">
+			AND m.store_id = #storeId#
+		</isNotEmpty>
+	</select>
+
 	<select id="getFriend" resultClass="zmFriend">
 		SELECT * FROM zm_friend m
 		WHERE m.user_id = #userId#
